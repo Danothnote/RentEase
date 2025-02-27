@@ -8,6 +8,7 @@ body {
   padding: 0;
 }
 
+/* Navbar */
 .navbar {
   background-color: #1d3141;
   height: 50px;
@@ -18,8 +19,8 @@ body {
 }
 
 .logoLink {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -67,6 +68,74 @@ body {
   object-fit: cover;
 }
 
+/* Landing Banner */
+.landingBanner {
+  background-image: url("./assets/landingWallpaper.webp");
+  background-size: cover;
+  background-position: bottom;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.landingTitleDiv {
+    background-color: rgb(29, 49, 65, 0.5);
+    border-radius: 10px;
+    position: relative;
+    top: 20%;
+    align-self: center;
+}
+
+.landingTitle {
+    font-size: 3em;
+    color: #FCF6D0;
+    text-align: center;
+    margin: 0px;
+}
+
+.landingButtons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 40%;
+}
+
+.landingButtons a {
+    text-decoration: none;
+    font-size: 1.5em;
+    text-align: center;
+    width: 160px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.landingPrimaryButton {
+    color: #1d3141;
+    background-color: #FFE8BC;
+    margin-right: 20%;
+}
+
+.landingPrimaryButton:hover {
+    background-color: #fbca6e;
+}
+
+.landingSecondaryButton {
+    color: #FFE8BC;
+    border: 2px solid #FFE8BC;
+}
+
+.landingSecondaryButton:hover {
+    color: #ffa500;
+    border: 2px solid #ffa500;
+    background-color: rgb(255, 165, 0, 0.15);
+}
+
+/* Footer */
 .footer {
   background-color: #1d3141;
   color: #ffe8bc;
