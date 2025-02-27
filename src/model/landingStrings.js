@@ -5,19 +5,28 @@ export const landingStrings = {
     reseñasTitle: "Reseñas de nuestros Clientes",
     clientes: [
         {
-            name: "Juan",
+            firstName: "Juan",
+            lastName: "Castillo",
             review: "Excelente departamento, el mejor lugar para vivir con mis hijos. Gracias por tu atención.",
-            stars: 5
+            date: "Hace 2 días",
+            stars: 5,
+            avatar: "src/assets/avatar1.webp"
         },
         {
-            name: "Maria",
+            firstName: "María",
+            lastName: "Torres",
             review: "El departamento fue perfecto para mi pareja y mi hijo, gracias por su excelente trabajo.",
-            stars: 4
+            date: "Hace 1 día",
+            stars: 4,
+            avatar: "src/assets/avatar2.webp"
         },
         {
-            name: "Pedro",
+            firstName: "Pedro",
+            lastName: "Vaca",
             review: "El departamento fue muy agradable, y los servicios son excelentes. Gracias por su atención.",
-            stars: 5
+            date: "Hace 3 días",
+            stars: 5,
+            avatar: "src/assets/avatar3.webp"
         }
     ]
 }

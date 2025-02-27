@@ -1,4 +1,4 @@
-# {
+* {
   box-sizing: content-box;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .loginButton {
-  height: 30px;
+  height: 20px;
   background-color: transparent;
   color: #ffe8bc;
   border: 2px solid #ffe8bc;
@@ -133,6 +133,74 @@ body {
     color: #ffa500;
     border: 2px solid #ffa500;
     background-color: rgb(255, 165, 0, 0.15);
+}
+
+/* Reviews */
+.reviews {
+    background-image: linear-gradient(#FFEBC3, #D29234);
+    padding: 50px 5%;
+}
+
+.reviewsTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reviewsContent {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.review {
+    width: 225px;
+    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.reviewAvatarContainer {
+    background-color: #1d3141;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviewAvatar {
+    background-color: #fff;
+    margin: 20px;
+    height: 180px;
+    width: 180px;
+    clip-path: circle(50%);
+    object-fit: contain;
+    object-position: top;
+}
+
+.reviewName {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.reviewText {
+    margin: 0px 30px;
+}
+
+.reviewStarsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.reviewDate {
+    color: rgb(0, 0, 0, 0.5);
+}
+
+.reviewStars img {
+    height: 1em;
+    width: 1em;
+    object-fit: contain;
 }
 
 /* Footer */
