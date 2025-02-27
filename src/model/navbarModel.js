@@ -1,0 +1,1 @@
+export const navBarModel = ["Inicio", "Departamentos", "Publica Ya!", "Nosotros"]
