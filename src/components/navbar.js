@@ -11,6 +11,7 @@ export const loginButton = document.createElement("button");
 
 // Agregando clases a los elementos al navbar
 navbar.className = "navbar";
+logoLink.className = "logoLink";
 logo.className = "logo";
 sections.className = "sections";
 avatar.className = "avatar";

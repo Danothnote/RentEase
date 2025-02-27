@@ -17,6 +17,11 @@ body {
   padding-inline: 5%;
 }
 
+.logoLink {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
   height: 40px;
 }
@@ -60,4 +65,48 @@ body {
   width: 30px;
   clip-path: circle(50%);
   object-fit: cover;
+}
+
+.footer {
+  background-color: #1d3141;
+  color: #ffe8bc;
+  padding: 30px 5%;
+  height: fit-content;
+}
+
+.footerTitle,
+.footerSubtitle {
+  text-align: center;
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footerContainer {
+  width: 30%;
+  justify-items: center;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffe8bc;
+}
+
+.footerListItem {
+  padding: 5px;
+}
+
+.footerLink {
+  margin-left: 10px;
+}
+
+.footerIcon {
+  height: 1em;
+  width: 30px;
+  object-fit: contain;
+  margin-right: 10px;
+  vertical-align: middle;
 }
