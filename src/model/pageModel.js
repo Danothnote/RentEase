@@ -1,0 +1,1 @@
+export const pageModel = ["landing", "login", "signup", "allFlats", "flat"];

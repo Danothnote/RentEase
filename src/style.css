@@ -203,6 +203,102 @@ body {
     object-fit: contain;
 }
 
+/* Signup */
+.signupContainer {
+  background-image: url("./assets/registro.webp");
+  background-size: cover;
+  background-position: bottom;
+  height: fit-content;
+  width: 100%;
+  z-index: -1;
+  justify-items: center;
+  padding: 30px 0px;
+}
+
+.containerGradient {
+  background-image: linear-gradient(rgb(75, 126, 167, 0.5), rgb(0, 0, 0, 0.5));
+  height: fit-content;
+  width: 100%;
+  position: relative;
+}
+
+.signupFormContainer {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 30px;
+  width: fit-content;
+  
+  /* transform: translate(50%, 50%); */
+}
+
+.signupTitle {
+  color:#1d3141;
+  text-align: center;
+}
+
+.signupInputContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Form */
+.formLabel {
+  color: #1d3141;
+  font-weight: bold;
+  margin: 0px 20px;
+  text-align: center;
+}
+
+.formInput {
+  border: 2px solid #1d3141;
+  color: #1d3141;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-inline: 20px;
+  width: 250px;
+  height: 20px;
+  display: block;
+  justify-self: center;
+}
+
+.formValidation {
+  color: red;
+  margin-top: 5px;
+  font-size: 0.8em;
+}
+
+.formPrimaryButton, .formSecondaryButton {
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 75px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 30px 0px;
+  display: block;
+}
+
+.formPrimaryButton {
+  color: #ffe8bc;
+  background-color: #1d3141;
+  justify-self: end;
+  margin-right: 20px;
+}
+
+.formPrimaryButton:hover {
+  background-color: #1f4360;
+}
+
+.formSecondaryButton {
+  color: #1d3141;
+  border: 2px solid #1d3141;
+  margin-left: 20px;
+}
+
+.formSecondaryButton:hover {
+  background-color: rgb(29, 49, 65, 0.2);
+}
+
 /* Footer */
 .footer {
   background-color: #1d3141;
