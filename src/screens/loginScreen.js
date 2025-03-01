@@ -1,34 +1,36 @@
+import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
 import { loginStrings } from "../model/loginStrings";
 import { pageModel } from "../model/pageModel";
 
+// Declarando elementos de la pantalla de Login
 const loginScreen = document.createElement('div');
-const loginScreenGradient = document.createElement("div");
-const loginFormContainer = document.createElement("div");
-const loginTitle = document.createElement("h1");
-const loginInputContainer = document.createElement("div");
+const screenGrandient = document.createElement("div");
+const formContainer = document.createElement("div");
+const formTitle = document.createElement("h1");
+const formInputContainer = document.createElement("div");
 const loginLabelUsername = document.createElement("p");
 const loginInputUsername = document.createElement("input");
 const loginLabelPassword = document.createElement("p");
 const loginInputPassword = document.createElement("input");
-const loginPrimaryButton = document.createElement("button");
-const loginSecondaryButton = document.createElement("button");
+const formPrimaryButton = document.createElement("button");
+const formSecondaryButton = document.createElement("button");
 
 // Agregando clases a los elementos al login screen
 loginScreen.className = "loginScreen";
-loginScreenGradient.className = "containerGradient";
-loginFormContainer.className = "loginFormContainer";
-loginTitle.className = "formTitle";
-loginInputContainer.className = "loginInputContainer";
+screenGrandient.className = "containerGradient";
+formContainer.className = "formContainer";
+formTitle.className = "formTitle";
+formInputContainer.className = "formInputContainer";
 loginLabelUsername.className = "formLabel";
 loginInputUsername.className = "formInput";
 loginLabelPassword.className = "formLabel";
 loginInputPassword.className = "formInput";
-loginPrimaryButton.className = "formPrimaryButton";
-loginSecondaryButton.className = "formSecondaryButton";
+formPrimaryButton.className = "formPrimaryButton";
+formSecondaryButton.className = "formSecondaryButton";
 
 // Agregando propiedades a los elementos
-loginTitle.textContent = loginStrings.title;
+formTitle.textContent = loginStrings.title;
 loginLabelUsername.textContent = loginStrings.username.label;
 loginInputUsername.type = loginStrings.username.type;
 loginInputUsername.id = loginStrings.username.id;
@@ -37,19 +39,21 @@ loginLabelPassword.textContent = loginStrings.password.label;
 loginInputPassword.type = loginStrings.password.type;
 loginInputPassword.id = loginStrings.password.id;
 loginInputPassword.placeholder = loginStrings.password.placeholder;
-loginPrimaryButton.textContent = loginStrings.submit;
-loginSecondaryButton.textContent = loginStrings.signup;
+formPrimaryButton.textContent = loginStrings.submit;
+formSecondaryButton.textContent = loginStrings.signup;
 
 // Agregando eventos a los botones
-loginPrimaryButton.addEventListener("click", () => {
+formPrimaryButton.addEventListener("click", () => {
     if (loginStrings.username.valid && loginStrings.password.valid) {
+        clearInputs();
         pageRouter(pageModel.list[0]);
     } else {
         alert("Tiene que ingrear correctamente todos los campos");
     }
 });
 
-loginSecondaryButton.addEventListener("click", () => {
+formSecondaryButton.addEventListener("click", () => {
+    clearInputs();
     pageRouter(pageModel.list[2]);
 });
 
@@ -64,15 +68,15 @@ loginInputPassword.addEventListener("keyup", () => {
 });
 
 // Agregando los elementos al login screen
-loginFormContainer.appendChild(loginTitle);
-loginFormContainer.appendChild(loginInputContainer);
-loginInputContainer.appendChild(loginLabelUsername);
-loginInputContainer.appendChild(loginInputUsername);
-loginInputContainer.appendChild(loginLabelPassword);
-loginInputContainer.appendChild(loginInputPassword);
-loginFormContainer.appendChild(loginPrimaryButton);
-loginFormContainer.appendChild(loginSecondaryButton);
-loginScreenGradient.appendChild(loginFormContainer);
-loginScreen.appendChild(loginScreenGradient);
+formContainer.appendChild(formTitle);
+formContainer.appendChild(formInputContainer);
+formInputContainer.appendChild(loginLabelUsername);
+formInputContainer.appendChild(loginInputUsername);
+formInputContainer.appendChild(loginLabelPassword);
+formInputContainer.appendChild(loginInputPassword);
+formContainer.appendChild(formPrimaryButton);
+formContainer.appendChild(formSecondaryButton);
+screenGrandient.appendChild(formContainer);
+loginScreen.appendChild(screenGrandient);
 
 export default loginScreen;

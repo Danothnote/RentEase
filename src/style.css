@@ -78,133 +78,133 @@ body {
   flex-direction: column;
 }
 
-
 .landingTitleDiv {
-    background-color: rgb(29, 49, 65, 0.5);
-    border-radius: 10px;
-    position: relative;
-    top: 20%;
-    align-self: center;
+  background-color: rgb(29, 49, 65, 0.5);
+  border-radius: 10px;
+  position: relative;
+  top: 20%;
+  align-self: center;
 }
 
 .landingTitle {
-    font-size: 3em;
-    color: #FCF6D0;
-    text-align: center;
-    margin: 0px;
+  font-size: 3em;
+  color: #fcf6d0;
+  text-align: center;
+  margin: 0px;
 }
 
 .landingButtons {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 40%;
 }
 
 .landingButtons a {
-    text-decoration: none;
-    font-size: 1.5em;
-    text-align: center;
-    width: 160px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5em;
+  text-align: center;
+  width: 160px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-
 .landingPrimaryButton {
-    color: #1d3141;
-    background-color: #FFE8BC;
-    margin-right: 20%;
+  color: #1d3141;
+  background-color: #ffe8bc;
+  margin-right: 20%;
 }
 
 .landingPrimaryButton:hover {
-    background-color: #fbca6e;
+  background-color: #fbca6e;
 }
 
 .landingSecondaryButton {
-    color: #FFE8BC;
-    border: 2px solid #FFE8BC;
+  color: #ffe8bc;
+  border: 2px solid #ffe8bc;
 }
 
 .landingSecondaryButton:hover {
-    color: #ffa500;
-    border: 2px solid #ffa500;
-    background-color: rgb(255, 165, 0, 0.15);
+  color: #ffa500;
+  border: 2px solid #ffa500;
+  background-color: rgb(255, 165, 0, 0.15);
 }
 
 /* Reviews */
 .reviews {
-    background-image: linear-gradient(#FFEBC3, #D29234);
-    padding: 50px 5%;
+  background-image: linear-gradient(#ffebc3, #d29234);
+  padding: 50px 5%;
 }
 
 .reviewsTitle {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .reviewsContent {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .review {
-    width: 225px;
-    margin-top: 30px;
-    background-color: #fff;
-    border-radius: 10px;
+  width: 225px;
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .reviewAvatarContainer {
-    background-color: #1d3141;
-    border-radius: 10px 10px 0px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #1d3141;
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .reviewAvatar {
-    background-color: #fff;
-    margin: 20px;
-    height: 180px;
-    width: 180px;
-    clip-path: circle(50%);
-    object-fit: contain;
-    object-position: top;
+  background-color: #fff;
+  margin: 20px;
+  height: 180px;
+  width: 180px;
+  clip-path: circle(50%);
+  object-fit: contain;
+  object-position: top;
 }
 
 .reviewName {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 5px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .reviewText {
-    margin: 0px 30px;
+  margin: 0px 30px;
 }
 
 .reviewStarsContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .reviewDate {
-    color: rgb(0, 0, 0, 0.5);
+  color: rgb(0, 0, 0, 0.5);
 }
 
 .reviewStars img {
-    height: 1em;
-    width: 1em;
-    object-fit: contain;
+  height: 1em;
+  width: 1em;
+  object-fit: contain;
 }
 
 /* Signup */
-.signupScreen, .loginScreen {
+.signupScreen,
+.loginScreen,
+.newFlatScreen {
   background-image: url("./assets/registro.webp");
   background-size: cover;
   background-position: bottom;
@@ -221,8 +221,16 @@ body {
   background-image: url("./assets/login.webp");
 }
 
+.newFlatcreen {
+  background-image: url("./assets/publicar.webp");
+}
+
 .containerGradient {
-  background-image: linear-gradient(to left, rgb(75, 126, 167, 0.5), rgb(0, 0, 0, 0.5));
+  background-image: linear-gradient(
+    to left,
+    rgb(75, 126, 167, 0.5),
+    rgb(0, 0, 0, 0.5)
+  );
   height: fit-content;
   width: 100%;
   position: relative;
@@ -230,7 +238,8 @@ body {
   padding: 30px 0px;
 }
 
-.signupFormContainer, .loginFormContainer {
+.signupFormContainer,
+.formContainer {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 30px;
@@ -238,11 +247,11 @@ body {
 }
 
 .formTitle {
-  color:#1d3141;
+  color: #1d3141;
   text-align: center;
 }
 
-.signupInputContainer {
+.gridFormInputContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -255,7 +264,8 @@ body {
   text-align: center;
 }
 
-.formInput {
+.formInput,
+.formSelectInput {
   border: 2px solid #1d3141;
   color: #1d3141;
   padding: 10px 20px;
@@ -268,13 +278,23 @@ body {
   justify-self: center;
 }
 
+.formSelectInput {
+  background-color: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 0.65rem auto;
+}
+
 .formValidation {
   color: red;
   margin-top: 5px;
   font-size: 0.8em;
 }
 
-.formPrimaryButton, .formSecondaryButton {
+.formPrimaryButton,
+.formSecondaryButton {
   font-weight: bold;
   padding: 10px 20px;
   width: 100px;
@@ -290,12 +310,17 @@ body {
   background-color: #1d3141;
 }
 
-.signupInputContainerLeft .formPrimaryButton {
+.formContainer .formPrimaryButton,
+.formContainer .formSecondaryButton {
+  justify-self: center;
+}
+
+.formInputContainerLeft .formPrimaryButton {
   justify-self: end;
 }
 
-.loginFormContainer .formPrimaryButton, .loginFormContainer .formSecondaryButton {
-  justify-self: center;
+.formInputContainerRight .formSecondaryButton {
+  justify-self: start;
 }
 
 .formPrimaryButton:hover {
@@ -309,6 +334,31 @@ body {
 
 .formSecondaryButton:hover {
   background-color: rgb(29, 49, 65, 0.2);
+}
+
+.imgContainer {
+  justify-items: center;
+  padding-inline: 20px;
+}
+
+.imgContainer .formPrimaryButton {
+  justify-self: center;
+}
+
+.dragImg {
+  width: 100%;
+  border: 2px dashed #1d3141;
+  color: #1d3141;
+  border-radius: 10px;
+  height: 127px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.dragLabelIcon {
+  height: 2em;
 }
 
 /* Footer */

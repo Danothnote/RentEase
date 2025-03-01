@@ -1,4 +1,4 @@
 export const pageModel = {
     actual: "landing",
-    list: ["landing", "login", "signup", "allFlats", "flat"],
+    list: ["landing", "login", "signup", "allFlats", "newflat"],
 }

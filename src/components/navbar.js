@@ -31,7 +31,10 @@ avatar.alt = "avatar";
 avatar.addEventListener("click", loginFun);
 
 // Agregando logo y su funcionalidad
-logoLink.href = "#";
+logoLink.addEventListener("click", () => {
+    pageRouter(pageModel.list[0]);
+})
+logoLink.style.cursor = "pointer";
 logo.src = "src/assets/logo.webp";
 logo.alt = "logo";
 

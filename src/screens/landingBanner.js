@@ -1,4 +1,6 @@
+import { pageRouter } from "../functions/pageRouter";
 import { landingStrings } from "../model/landingStrings";
+import { pageModel } from "../model/pageModel";
 
 const landingBanner = document.createElement("div");
 const landingTitleDiv = document.createElement("div");
@@ -17,8 +19,12 @@ secondaryButton.className = "landingSecondaryButton";
 landingTitle.textContent = landingStrings.landingTitle;
 primaryButton.textContent = landingStrings.primaryButton;
 secondaryButton.textContent = landingStrings.secondaryButton;
-primaryButton.href = "#";
-secondaryButton.href = "#";
+primaryButton.addEventListener("click", () => {
+    pageRouter(pageModel.list[3]);
+});
+secondaryButton.addEventListener("click", () => {
+    pageRouter(pageModel.list[4]);
+});
 
 landingTitleDiv.appendChild(landingTitle);
 landingButtons.appendChild(primaryButton);

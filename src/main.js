@@ -1,4 +1,4 @@
-import contentScreen from "./components/contentScreen";
+import contentScreen from "./screens/contentScreen";
 import footerDiv from "./components/footer";
 import navbar from "./components/navbar";
 import { pageRouter } from "./functions/pageRouter";

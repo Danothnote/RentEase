@@ -1,3 +1,4 @@
+import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
 import { validatePassword } from "../functions/validatePassword";
 import { pageModel } from "../model/pageModel";
@@ -6,35 +7,35 @@ import { validationStrings } from "../model/validationStrings";
 
 // Declarando elementos de la pantalla de Registro
 const signupScreen = document.createElement("div");
-const signupScreenGradient = document.createElement("div");
-const signupFormContainer = document.createElement("div");
-const signupTitle = document.createElement("h1");
+const screenGrandient = document.createElement("div");
+const formContainer = document.createElement("div");
+const formTitle = document.createElement("h1");
 const signupForm = document.createElement("div");
-const signupInputContainer = document.createElement("div");
-const signupInputContainerLeft = document.createElement("div");
-const signupInputContainerRight = document.createElement("div");
+const gridFormInputContainer = document.createElement("div");
+const formInputContainerLeft = document.createElement("div");
+const formInputContainerRight = document.createElement("div");
 const signupValidationsContainer = document.createElement("div");
 const signupLabelUsername = document.createElement("p");
 const signupInputUsername = document.createElement("input");
-const signupPrimaryButton = document.createElement("button");
-const signupSecondaryButton = document.createElement("button");
+const formPrimaryButton = document.createElement("button");
+const formSecondaryButton = document.createElement("button");
 
 // Asignando clases a los elementos
 signupScreen.className = "signupScreen";
-signupScreenGradient.className = "containerGradient";
-signupFormContainer.className = "signupFormContainer";
-signupInputContainer.className = "signupInputContainer";
-signupInputContainerLeft.className = "signupInputContainerLeft";
-signupInputContainerRight.className = "signupInputContainerRight";
-signupTitle.className = "formTitle";
+screenGrandient.className = "containerGradient";
+formContainer.className = "formContainer";
+gridFormInputContainer.className = "gridFormInputContainer";
+formInputContainerLeft.className = "formInputContainerLeft";
+formInputContainerRight.className = "formInputContainerRight";
+formTitle.className = "formTitle";
 signupForm.className = "signupForm";
 signupLabelUsername.className = "formLabel";
 signupInputUsername.className = "formInput";
-signupPrimaryButton.className = "formPrimaryButton";
-signupSecondaryButton.className = "formSecondaryButton";
+formPrimaryButton.className = "formPrimaryButton";
+formSecondaryButton.className = "formSecondaryButton";
 
 // Asignando propiedades a los elementos
-signupTitle.textContent = signupStrings.title;
+formTitle.textContent = signupStrings.title;
 signupLabelUsername.textContent = signupStrings.username.label;
 signupInputUsername.type = signupStrings.username.type;
 signupInputUsername.id = signupStrings.username.id;
@@ -42,19 +43,23 @@ signupInputUsername.placeholder = signupStrings.username.placeholder;
 signupInputUsername.addEventListener("keyup", () => {
     signupInputUsername.value !== "" ? signupStrings.username.valid = true : signupStrings.username.valid = false;
 });
-signupPrimaryButton.textContent = signupStrings.submit;
-signupSecondaryButton.textContent = signupStrings.cancel;
+formPrimaryButton.textContent = signupStrings.submit;
+formSecondaryButton.textContent = signupStrings.cancel;
 
 // Agregando eventos a los botones
-signupPrimaryButton.addEventListener("click", () => {
+formPrimaryButton.addEventListener("click", () => {
     if (signupStrings.username.valid && signupStrings.left[0].valid && signupStrings.left[1].valid && signupStrings.left[2].valid && signupStrings.right[0].valid && signupStrings.right[1].valid) {
+        clearInputs();
         pageRouter(pageModel.list[0]);
     } else {
         alert("Tiene que ingrear correctamente todos los campos");
     }
 });
 
-signupSecondaryButton.addEventListener("click", () => pageRouter(pageModel.list[0]));
+formSecondaryButton.addEventListener("click", () => {
+    clearInputs();
+    pageRouter(pageModel.list[0]);
+});
 
 // Creando los inputs y añadiendolos a los divs
 signupStrings.left.forEach(element => {
@@ -78,8 +83,8 @@ signupStrings.left.forEach(element => {
         });
     }
 
-    signupInputContainerLeft.appendChild(label);
-    signupInputContainerLeft.appendChild(input);
+    formInputContainerLeft.appendChild(label);
+    formInputContainerLeft.appendChild(input);
 });
 
 signupStrings.right.forEach(element => {
@@ -102,8 +107,8 @@ signupStrings.right.forEach(element => {
         });
     }
 
-    signupInputContainerRight.appendChild(label);
-    signupInputContainerRight.appendChild(input);
+    formInputContainerRight.appendChild(label);
+    formInputContainerRight.appendChild(input);
 });
 
 // Añadiendo las validaciones de contraseñas al form
@@ -118,17 +123,17 @@ validationStrings.passwordValidations.forEach(element => {
 
 
 // Añadiendo los elementos a la pantalla de Registro
-signupFormContainer.appendChild(signupTitle);
+formContainer.appendChild(formTitle);
 signupForm.appendChild(signupLabelUsername);
 signupForm.appendChild(signupInputUsername);
-signupInputContainerLeft.appendChild(signupPrimaryButton);
-signupInputContainerRight.appendChild(signupSecondaryButton);
-signupInputContainer.appendChild(signupInputContainerLeft);
-signupInputContainer.appendChild(signupInputContainerRight);
-signupForm.appendChild(signupInputContainer);
+formInputContainerLeft.appendChild(formPrimaryButton);
+formInputContainerRight.appendChild(formSecondaryButton);
+gridFormInputContainer.appendChild(formInputContainerLeft);
+gridFormInputContainer.appendChild(formInputContainerRight);
+signupForm.appendChild(gridFormInputContainer);
 signupForm.appendChild(signupValidationsContainer);
-signupFormContainer.appendChild(signupForm);
-signupScreenGradient.appendChild(signupFormContainer);
-signupScreen.appendChild(signupScreenGradient);
+formContainer.appendChild(signupForm);
+screenGrandient.appendChild(formContainer);
+signupScreen.appendChild(screenGrandient);
 
 export default signupScreen;

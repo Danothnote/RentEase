@@ -1,7 +1,8 @@
-import landingScreen from "../components/landingScreen";
-import loginScreen from "../components/loginScreen";
-import signupScreen from "../components/signupScreen";
+import landingScreen from "../screens/landingScreen";
+import loginScreen from "../screens/loginScreen";
+import signupScreen from "../screens/signupScreen";
 import { pageModel } from "../model/pageModel";
+import newFlatScreen from "../screens/newFlatScreen";
 
 export const pageRouter = (page) => {
     switch (page) {
@@ -23,7 +24,7 @@ export const pageRouter = (page) => {
             break;
         case pageModel.list[4]:
             pageModel.actual = pageModel.list[4];
-            document.querySelector("#contentScreen").replaceChildren();
+            document.querySelector("#contentScreen").replaceChildren(newFlatScreen);
             break;
         default:
             break;
