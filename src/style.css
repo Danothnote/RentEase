@@ -204,34 +204,40 @@ body {
 }
 
 /* Signup */
-.signupContainer {
+.signupScreen, .loginScreen {
   background-image: url("./assets/registro.webp");
   background-size: cover;
   background-position: bottom;
   height: fit-content;
   width: 100%;
   z-index: -1;
+}
+
+.signupScreen {
+  background-image: url("./assets/registro.webp");
+}
+
+.loginScreen {
+  background-image: url("./assets/login.webp");
+}
+
+.containerGradient {
+  background-image: linear-gradient(to left, rgb(75, 126, 167, 0.5), rgb(0, 0, 0, 0.5));
+  height: fit-content;
+  width: 100%;
+  position: relative;
   justify-items: center;
   padding: 30px 0px;
 }
 
-.containerGradient {
-  background-image: linear-gradient(rgb(75, 126, 167, 0.5), rgb(0, 0, 0, 0.5));
-  height: fit-content;
-  width: 100%;
-  position: relative;
-}
-
-.signupFormContainer {
+.signupFormContainer, .loginFormContainer {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 30px;
   width: fit-content;
-  
-  /* transform: translate(50%, 50%); */
 }
 
-.signupTitle {
+.formTitle {
   color:#1d3141;
   text-align: center;
 }
@@ -271,18 +277,25 @@ body {
 .formPrimaryButton, .formSecondaryButton {
   font-weight: bold;
   padding: 10px 20px;
-  width: 75px;
+  width: 100px;
   border-radius: 10px;
   cursor: pointer;
   margin: 30px 0px;
   display: block;
+  margin-inline: 20px;
 }
 
 .formPrimaryButton {
   color: #ffe8bc;
   background-color: #1d3141;
+}
+
+.signupInputContainerLeft .formPrimaryButton {
   justify-self: end;
-  margin-right: 20px;
+}
+
+.loginFormContainer .formPrimaryButton, .loginFormContainer .formSecondaryButton {
+  justify-self: center;
 }
 
 .formPrimaryButton:hover {
@@ -292,7 +305,6 @@ body {
 .formSecondaryButton {
   color: #1d3141;
   border: 2px solid #1d3141;
-  margin-left: 20px;
 }
 
 .formSecondaryButton:hover {

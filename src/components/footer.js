@@ -16,6 +16,7 @@ const footerContactContent = document.createElement("div");
 
 //Asignando clases a los elementos del footer
 footerDiv.className = "footer";
+footerDiv.id = "footer"
 footerTitle.className = "footerTitle";
 footerContent.className = "footerContent";
 footerAbout.className = "footerContainer";
@@ -89,6 +90,5 @@ footerContent.appendChild(footerSocial);
 footerContent.appendChild(footerContact);
 footerDiv.appendChild(footerTitle);
 footerDiv.appendChild(footerContent);
-
 
 export default footerDiv;

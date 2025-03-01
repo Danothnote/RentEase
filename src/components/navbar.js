@@ -1,5 +1,7 @@
 import { loginFun, loginState } from "../functions/login";
+import { pageRouter } from "../functions/pageRouter";
 import { navBarModel } from "../model/navbarModel";
+import { pageModel } from "../model/pageModel";
 
 // Declaración de elementos del navbar
 const navbar = document.createElement("div");
@@ -19,7 +21,9 @@ loginButton.className = "loginButton";
 
 // Agregando funcionalidad al boton de inicio de sesión
 loginButton.textContent = "Iniciar Sesión";
-loginButton.addEventListener("click", loginFun);
+loginButton.addEventListener("click", () => {
+    pageRouter(pageModel.list[1]);
+});
 
 //Agregando funcionalidad al avatar
 avatar.src = "src/assets/avatar.avif";
@@ -34,8 +38,15 @@ logo.alt = "logo";
 //Agregando al navbar los enlaces de las secciones
 navBarModel.forEach(element => {
     const section = document.createElement("a");
-    section.href = `#${element}`;
-    section.textContent = element;
+    if (element.label === "Nosotros") {
+        section.href = element.page;
+    } else {
+        section.addEventListener("click", () => {
+            pageRouter(element.page);
+        })
+    }
+    section.style.cursor = "pointer";
+    section.textContent = element.label;
     sections.appendChild(section);
 })
 

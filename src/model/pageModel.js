@@ -1,1 +1,4 @@
-export const pageModel = ["landing", "login", "signup", "allFlats", "flat"];
+export const pageModel = {
+    actual: "landing",
+    list: ["landing", "login", "signup", "allFlats", "flat"],
+}

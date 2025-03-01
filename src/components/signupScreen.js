@@ -1,15 +1,15 @@
+import { pageRouter } from "../functions/pageRouter";
 import { validatePassword } from "../functions/validatePassword";
+import { pageModel } from "../model/pageModel";
 import { signupStrings } from "../model/signupStrings";
 import { validationStrings } from "../model/validationStrings";
-import landingBanner from "./landingBanner";
-import reviews from "./reviews";
 
 // Declarando elementos de la pantalla de Registro
-const signupContainer = document.createElement("div");
-const signupContainerGradient = document.createElement("div");
+const signupScreen = document.createElement("div");
+const signupScreenGradient = document.createElement("div");
 const signupFormContainer = document.createElement("div");
 const signupTitle = document.createElement("h1");
-const signupForm = document.createElement("form");
+const signupForm = document.createElement("div");
 const signupInputContainer = document.createElement("div");
 const signupInputContainerLeft = document.createElement("div");
 const signupInputContainerRight = document.createElement("div");
@@ -20,13 +20,13 @@ const signupPrimaryButton = document.createElement("button");
 const signupSecondaryButton = document.createElement("button");
 
 // Asignando clases a los elementos
-signupContainer.className = "signupContainer";
-signupContainerGradient.className = "containerGradient";
+signupScreen.className = "signupScreen";
+signupScreenGradient.className = "containerGradient";
 signupFormContainer.className = "signupFormContainer";
 signupInputContainer.className = "signupInputContainer";
 signupInputContainerLeft.className = "signupInputContainerLeft";
 signupInputContainerRight.className = "signupInputContainerRight";
-signupTitle.className = "signupTitle";
+signupTitle.className = "formTitle";
 signupForm.className = "signupForm";
 signupLabelUsername.className = "formLabel";
 signupInputUsername.className = "formInput";
@@ -43,17 +43,18 @@ signupInputUsername.addEventListener("keyup", () => {
     signupInputUsername.value !== "" ? signupStrings.username.valid = true : signupStrings.username.valid = false;
 });
 signupPrimaryButton.textContent = signupStrings.submit;
-signupPrimaryButton.type = "button";
+signupSecondaryButton.textContent = signupStrings.cancel;
+
+// Agregando eventos a los botones
 signupPrimaryButton.addEventListener("click", () => {
     if (signupStrings.username.valid && signupStrings.left[0].valid && signupStrings.left[1].valid && signupStrings.left[2].valid && signupStrings.right[0].valid && signupStrings.right[1].valid) {
-        document.querySelector("#app").removeChild(signupContainer);
-        document.querySelector("#app").insertBefore(landingBanner, document.querySelector(".footer") );
-        document.querySelector("#app").insertBefore(reviews, document.querySelector(".footer"));
+        pageRouter(pageModel.list[0]);
     } else {
         alert("Tiene que ingrear correctamente todos los campos");
     }
 });
-signupSecondaryButton.textContent = signupStrings.cancel;
+
+signupSecondaryButton.addEventListener("click", () => pageRouter(pageModel.list[0]));
 
 // Creando los inputs y añadiendolos a los divs
 signupStrings.left.forEach(element => {
@@ -117,7 +118,6 @@ validationStrings.passwordValidations.forEach(element => {
 
 
 // Añadiendo los elementos a la pantalla de Registro
-signupContainer.appendChild(signupContainerGradient);
 signupFormContainer.appendChild(signupTitle);
 signupForm.appendChild(signupLabelUsername);
 signupForm.appendChild(signupInputUsername);
@@ -128,6 +128,7 @@ signupInputContainer.appendChild(signupInputContainerRight);
 signupForm.appendChild(signupInputContainer);
 signupForm.appendChild(signupValidationsContainer);
 signupFormContainer.appendChild(signupForm);
-signupContainer.appendChild(signupFormContainer);
+signupScreenGradient.appendChild(signupFormContainer);
+signupScreen.appendChild(signupScreenGradient);
 
-export default signupContainer;
+export default signupScreen;
