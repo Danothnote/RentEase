@@ -1,6 +1,6 @@
-import { loginFun, loginState } from "../functions/login";
+import { loginFun, loginState } from "../functions/login/login";
 import { pageRouter } from "../functions/pageRouter";
-import { navBarModel } from "../model/navbarModel";
+import { navBarModel } from "../model/navbar/navbarModel";
 import { pageModel } from "../model/pageModel";
 
 // Declaración de elementos del navbar

@@ -1,22 +1,22 @@
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
-import { validatePassword } from "../functions/validatePassword";
+import { validatePassword } from "../functions/signup/validatePassword";
 import { pageModel } from "../model/pageModel";
-import { signupStrings } from "../model/signupStrings";
-import { validationStrings } from "../model/validationStrings";
+import { signupStrings } from "../model/signup/signupStrings";
+import { validationStrings } from "../model/signup/validationStrings";
 
 // Declarando elementos de la pantalla de Registro
 const signupScreen = document.createElement("div");
+const signupForm = document.createElement("div");
+const signupValidationsContainer = document.createElement("div");
 const screenGrandient = document.createElement("div");
 const formContainer = document.createElement("div");
-const formTitle = document.createElement("h1");
-const signupForm = document.createElement("div");
 const gridFormInputContainer = document.createElement("div");
 const formInputContainerLeft = document.createElement("div");
 const formInputContainerRight = document.createElement("div");
-const signupValidationsContainer = document.createElement("div");
-const signupLabelUsername = document.createElement("p");
-const signupInputUsername = document.createElement("input");
+const formLabel = document.createElement("p");
+const formInput = document.createElement("input");
+const formTitle = document.createElement("h1");
 const formPrimaryButton = document.createElement("button");
 const formSecondaryButton = document.createElement("button");
 
@@ -29,19 +29,19 @@ formInputContainerLeft.className = "formInputContainerLeft";
 formInputContainerRight.className = "formInputContainerRight";
 formTitle.className = "formTitle";
 signupForm.className = "signupForm";
-signupLabelUsername.className = "formLabel";
-signupInputUsername.className = "formInput";
+formLabel.className = "formLabel";
+formInput.className = "formInput";
 formPrimaryButton.className = "formPrimaryButton";
 formSecondaryButton.className = "formSecondaryButton";
 
 // Asignando propiedades a los elementos
 formTitle.textContent = signupStrings.title;
-signupLabelUsername.textContent = signupStrings.username.label;
-signupInputUsername.type = signupStrings.username.type;
-signupInputUsername.id = signupStrings.username.id;
-signupInputUsername.placeholder = signupStrings.username.placeholder;
-signupInputUsername.addEventListener("keyup", () => {
-    signupInputUsername.value !== "" ? signupStrings.username.valid = true : signupStrings.username.valid = false;
+formLabel.textContent = signupStrings.username.label;
+formInput.type = signupStrings.username.type;
+formInput.id = signupStrings.username.id;
+formInput.placeholder = signupStrings.username.placeholder;
+formInput.addEventListener("keyup", () => {
+    formInput.value !== "" ? signupStrings.username.valid = true : signupStrings.username.valid = false;
 });
 formPrimaryButton.textContent = signupStrings.submit;
 formSecondaryButton.textContent = signupStrings.cancel;
@@ -73,6 +73,7 @@ signupStrings.left.forEach(element => {
     input.type = element.type;
     input.placeholder = element.placeholder;
     input.id = element.id;
+
     if (input.id === "birthday") {
         input.addEventListener("change", () => {
             input.value !== "" ? element.valid = true : element.valid = false;
@@ -124,8 +125,8 @@ validationStrings.passwordValidations.forEach(element => {
 
 // Añadiendo los elementos a la pantalla de Registro
 formContainer.appendChild(formTitle);
-signupForm.appendChild(signupLabelUsername);
-signupForm.appendChild(signupInputUsername);
+signupForm.appendChild(formLabel);
+signupForm.appendChild(formInput);
 formInputContainerLeft.appendChild(formPrimaryButton);
 formInputContainerRight.appendChild(formSecondaryButton);
 gridFormInputContainer.appendChild(formInputContainerLeft);

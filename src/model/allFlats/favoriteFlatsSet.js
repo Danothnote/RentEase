@@ -1,0 +1,1 @@
+export const favoriteFlatsSet = new Set();

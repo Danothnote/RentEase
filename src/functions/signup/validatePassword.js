@@ -1,4 +1,4 @@
-import { signupStrings } from "../model/signupStrings";
+import { signupStrings } from "../../model/signup/signupStrings";
 
 export const validatePassword = () => {
     const password = document.getElementById("password").value;

@@ -1,4 +1,4 @@
-import { avatar, loginButton, sections } from "../components/navbar";
+import { avatar, loginButton, sections } from "../../components/navbar";
 
 export let loginState = false;
 export const loginFun = () => {

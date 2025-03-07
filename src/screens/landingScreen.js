@@ -1,4 +1,4 @@
-import landingBanner from "./landingBanner";
+import landingBanner from "../components/landingBanner";
 import reviews from "../components/reviews";
 
 const landingScreen = document.createElement("div");

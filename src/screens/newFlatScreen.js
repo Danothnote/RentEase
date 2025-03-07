@@ -1,6 +1,6 @@
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
-import { newFlatStrings } from "../model/newFlatStrings";
+import { newFlatStrings } from "../model/newFlat/newFlatStrings";
 import { pageModel } from "../model/pageModel";
 
 // Declarando elementos de la pantalla de newFlat
@@ -77,6 +77,12 @@ newFlatStrings.left.forEach(element => {
         input.addEventListener("change", () => {
             input.value !== "" ? element.valid = true : element.valid = false;
         });
+
+        if (element.id === "constructionDate") {
+            input.min = element.min;
+            input.max= element.max;
+            input.value = element.max;
+        }
 
         formInputContainerLeft.appendChild(input);
     }

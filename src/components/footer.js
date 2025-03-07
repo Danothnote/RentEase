@@ -1,4 +1,4 @@
-import { footerStrings } from "../model/footerStrings";
+import { footerStrings } from "../model/footer/footerStrings";
 
 // Creando los elementos del footer
 const footerDiv = document.createElement("div");

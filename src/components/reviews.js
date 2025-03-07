@@ -1,4 +1,4 @@
-import { landingStrings } from "../model/landingStrings";
+import { landingStrings } from "../model/landing/landingStrings";
 
 const reviews = document.createElement('div');
 const reviewsTitle = document.createElement('h1');

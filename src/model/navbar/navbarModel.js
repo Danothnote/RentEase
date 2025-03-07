@@ -1,4 +1,4 @@
-import { pageModel } from "./pageModel";
+import { pageModel } from "../pageModel";
 
 export const navBarModel = [
     {

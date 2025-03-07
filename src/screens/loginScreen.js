@@ -1,14 +1,14 @@
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
-import { loginStrings } from "../model/loginStrings";
+import { loginStrings } from "../model/login/loginStrings";
 import { pageModel } from "../model/pageModel";
 
 // Declarando elementos de la pantalla de Login
 const loginScreen = document.createElement('div');
 const screenGrandient = document.createElement("div");
 const formContainer = document.createElement("div");
-const formTitle = document.createElement("h1");
 const formInputContainer = document.createElement("div");
+const formTitle = document.createElement("h1");
 const loginLabelUsername = document.createElement("p");
 const loginInputUsername = document.createElement("input");
 const loginLabelPassword = document.createElement("p");

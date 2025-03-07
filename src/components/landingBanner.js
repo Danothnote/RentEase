@@ -1,5 +1,5 @@
 import { pageRouter } from "../functions/pageRouter";
-import { landingStrings } from "../model/landingStrings";
+import { landingStrings } from "../model/landing/landingStrings";
 import { pageModel } from "../model/pageModel";
 
 const landingBanner = document.createElement("div");
