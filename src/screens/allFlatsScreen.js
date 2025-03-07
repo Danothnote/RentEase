@@ -65,7 +65,7 @@ styleButtonDiv.addEventListener("click", () => {
     if (favoriteButton.classList.contains("active")) {
         updateFlats(gridIcon.classList.contains("active"), favoriteFlatsSet, favoriteButton, flatsContainer);
     } else {
-        if (allFlatsStrings.filtersOn.cityOn || allFlatsStrings.filtersOn.priceOn || allFlatsStrings.filtersOn.areaOn) {
+        if (allFlatsStrings.filtersOn.cityOn || allFlatsStrings.filtersOn.priceOn || allFlatsStrings.filtersOn.areaOn || allFlatsStrings.searchOn) {
             updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
         } else {
             updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsArray, favoriteButton, flatsContainer);
@@ -80,7 +80,9 @@ favoriteButton.addEventListener("click", () => {
 
 // Agregando funcionalidad al botón de búsqueda
 searchBar.addEventListener("input", () => {
-    updateFlats(gridIcon.classList.contains("active"), searchFilter(searchBar.value.toLowerCase()), favoriteButton, flatsContainer);
+    searchFilter(searchBar.value.toLowerCase());
+    resetFilters();
+    updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
 });
 
 // Agregando funcionalidad al selector de filtro
@@ -100,6 +102,7 @@ allFlatsStrings.filter.filters.forEach(element => {
     filterSideBar.appendChild(filterSelect);
     filterSelect.addEventListener("change", () => {
         filterEvent(element, filterSelect.value, filteredArray);
+        searchBar.value = "";
         updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
     })
 });

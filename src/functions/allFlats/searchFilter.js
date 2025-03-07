@@ -7,5 +7,10 @@ export const searchFilter = (searchValue) => {
         flat.streetName.toLowerCase().includes(searchValue) ||
         flat.yearBuilt.toString().includes(searchValue)
     );
-    return filteredFlats;
+    allFlatsStrings.allFlatsFiltered = filteredFlats;
+    if (searchValue !== "") {
+        allFlatsStrings.searchOn = true;
+    } else {
+        allFlatsStrings.searchOn = false;
+    }
 }

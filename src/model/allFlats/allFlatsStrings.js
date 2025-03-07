@@ -67,6 +67,7 @@ export const allFlatsStrings = {
     tableHead: ["Nombre", "Ciudad", "Calle", "Número", "Área", "A/C", "Año de construcción", "Fecha de disponibilidad", "Precio de renta", "Foto", "Favoritos"],
     allFlatsArray: allFlatsArray,
     allFlatsFiltered: [],
+    searchOn: false,
     filtersOn: {
         cityOn: false,
         priceOn: false,
