@@ -1,5 +1,6 @@
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
+import { errorStrings } from "../model/errorStrings";
 import { newFlatStrings } from "../model/newFlat/newFlatStrings";
 import { pageModel } from "../model/pageModel";
 
@@ -48,19 +49,22 @@ newFlatStrings.left.forEach(element => {
         const dragLabelDiv = document.createElement("div");
         const dragLabel = document.createElement("p");
         const dragLabelIcon = document.createElement("img");
-        const uploadButton = document.createElement("button");
+        const uploadButton = document.createElement("input");
 
         imgContainer.className = "imgContainer";
         img.className = "dragImg";
         dragLabelDiv.className = "dragLabelDiv";
         dragLabel.className = "dragLabel";
         dragLabelIcon.className = "dragLabelIcon";
-        uploadButton.className = "formPrimaryButton";
+        uploadButton.className = "formInput";
+        uploadButton.style.marginTop = "35px";
+        uploadButton.style.backgroundColor = "white";
 
-        dragLabel.textContent = "Arrastra y suelta tus fotos aquí";
-        uploadButton.textContent = "Subir fotos";
-        dragLabelIcon.alt = "icon";
-        dragLabelIcon.src = "src/assets/upload.webp";
+        dragLabel.textContent = newFlatStrings.dragImgLabel;
+        uploadButton.type = "file";
+        uploadButton.accept = "image/*";
+        dragLabelIcon.alt = newFlatStrings.dragImgIconAlt;
+        dragLabelIcon.src = newFlatStrings.dragImgIconSrc;
 
         dragLabelDiv.appendChild(dragLabelIcon);
         dragLabelDiv.appendChild(dragLabel);
@@ -130,7 +134,7 @@ formPrimaryButton.addEventListener("click", () => {
         clearInputs();
         pageRouter(pageModel.list[0]);
     } else {
-        alert("Tiene que ingrear correctamente todos los campos");
+        alert(errorStrings.fillInputsError);
     }
 })
 

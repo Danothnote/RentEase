@@ -4,6 +4,7 @@ import signupScreen from "../screens/signupScreen";
 import { pageModel } from "../model/pageModel";
 import newFlatScreen from "../screens/newFlatScreen";
 import allFlatsScreen from "../screens/allFlatsScreen";
+import profileScreen from "../screens/profileScreen";
 
 export const pageRouter = (page) => {
     const contentScreen = document.querySelector("#contentScreen");
@@ -30,7 +31,7 @@ export const pageRouter = (page) => {
             break;
         case pageModel.list[5]:
             pageModel.actual = pageModel.list[5];
-            contentScreen.replaceChildren();
+            contentScreen.replaceChildren(profileScreen);
             break;
         default:
             pageModel.actual = pageModel.list[0];

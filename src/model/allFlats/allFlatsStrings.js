@@ -2,7 +2,7 @@ import { allFlatsArray } from "./allFlatsArray";
 import { allFlatsCitySet } from "./allFlatsFilterCitySet";
 
 export const allFlatsStrings = {
-    emptyLabel: "No se a agregado ninún elemento",
+    emptyLabel: "No se a agregado ningún elemento",
     searchBar: {
         placeholder: "Buscar",
         icon: "src/assets/searchIcon.webp"

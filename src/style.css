@@ -79,7 +79,7 @@ body {
 }
 
 .landingTitleDiv {
-  background-color: rgb(29, 49, 65, 0.5);
+  background-color: #1d314180;
   border-radius: 10px;
   position: relative;
   top: 20%;
@@ -130,7 +130,7 @@ body {
 .landingSecondaryButton:hover {
   color: #ffa500;
   border: 2px solid #ffa500;
-  background-color: rgb(255, 165, 0, 0.15);
+  background-color: #ffa50026;
 }
 
 /* Reviews */
@@ -192,7 +192,7 @@ body {
 }
 
 .reviewDate {
-  color: rgb(0, 0, 0, 0.5);
+  color: #00000080;
 }
 
 .reviewStars img {
@@ -221,15 +221,19 @@ body {
   background-image: url("./assets/login.webp");
 }
 
-.newFlatcreen {
+.newFlatScreen {
   background-image: url("./assets/publicar.webp");
+}
+
+.profileScreen {
+  background-image: url("./assets/perfil.webp");
 }
 
 .containerGradient {
   background-image: linear-gradient(
     to left,
-    rgb(75, 126, 167, 0.5),
-    rgb(0, 0, 0, 0.5)
+    #4b7ea780,
+    #00000080
   );
   height: fit-content;
   width: 100%;
@@ -238,12 +242,18 @@ body {
   padding: 30px 0px;
 }
 
+/* Form */
+.dialogContainer,
 .signupFormContainer,
 .formContainer {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #ffffffe6;
   border-radius: 10px;
   padding: 30px;
   width: fit-content;
+}
+
+.dialogContainer {
+  background-color: #ffffff;
 }
 
 .formTitle {
@@ -256,7 +266,6 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 
-/* Form */
 .formLabel {
   color: #1d3141;
   font-weight: bold;
@@ -341,7 +350,7 @@ body {
 }
 
 .formSecondaryButton:hover {
-  background-color: rgb(29, 49, 65, 0.2);
+  background-color: #1d314133;
 }
 
 .imgContainer {
@@ -401,7 +410,7 @@ body {
 .favoriteButton {
   height: 32px;
   margin-left: 30px;
-} 
+}
 
 .flatsFilterContainer {
   margin-block: 20px;
@@ -440,7 +449,7 @@ body {
 
 .cardFavorite {
   width: 30px;
-  background-color: rgb(29, 49, 65, 0.3);
+  background-color: #1d31414d;
   border-radius: 10px;
   position: absolute;
   margin: 10px;
@@ -464,7 +473,8 @@ body {
   border-radius: 10px;
 }
 
-.flatsTable th, .flatsTable td {
+.flatsTable th,
+.flatsTable td {
   padding: 8px 10px;
   text-align: center;
   border-bottom: 2px solid black;
@@ -492,6 +502,62 @@ tr:nth-of-type(even) {
 
 .tableFavorite {
   height: 35px;
+}
+
+/* Profile Screen */
+.profileFormInputContainer {
+  margin-block: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.formLeftContainer {
+  margin: 20px;
+  position: relative;
+}
+
+.formRightContainer {
+  margin: 20px;
+  font-size: 1.15em;
+  align-content: center;
+}
+
+.profileImg {
+  width: 150px;
+  height: 150px;
+  clip-path: circle(50%);
+  object-fit: cover;
+  position: relative;
+}
+
+.profileEditIcon {
+  height: 1em;
+  margin-left: 20px;
+}
+
+.profileChangeDiv {
+  width: 2em;
+  height: 2em;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.profileChangeDiv .profileEditIcon {
+  margin: 0px;
+}
+
+.profileButtonsDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* Footer */
