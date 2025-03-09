@@ -2,7 +2,7 @@ import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
 import { mapFilters } from "../../model/allFlats/mapFilters";
 
 export const filterEvent = (filter, selectedOption, filteredArray) => {
-    const filterArray = allFlatsStrings.allFlatsArray;
+    const filterArray = Array.from(allFlatsStrings.allFlatsArray);
     filteredArray = filterArray;
     const filters = Array.from(allFlatsStrings.filter.filters);
 

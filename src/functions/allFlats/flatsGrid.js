@@ -29,9 +29,9 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             const yearBuiltDiv = document.createElement("div");
             const yearBuiltLabel = document.createElement("span");
             const yearBuilt = document.createElement("span");
-            const availabilityDateDiv = document.createElement("div");
-            const availabilityDateLabel = document.createElement("span");
-            const availabilityDate = document.createElement("span");
+            const dateAvailableDiv = document.createElement("div");
+            const dateAvailableLabel = document.createElement("span");
+            const dateAvailable = document.createElement("span");
             const priceDiv = document.createElement("div");
             const priceLabel = document.createElement("span");
             const price = document.createElement("span");
@@ -46,21 +46,21 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             areaDiv.className = "cardItem";
             airConditioningDiv.className = "cardItem";
             yearBuiltDiv.className = "cardItem";
-            availabilityDateDiv.className = "cardItem";
+            dateAvailableDiv.className = "cardItem";
             priceDiv.className = "cardItem";
             cityLabel.className = "cardItemLabel"
             addressLabel.className = "cardItemLabel";
             areaLabel.className = "cardItemLabel";
             airConditioningLabel.className = "cardItemLabel";
             yearBuiltLabel.className = "cardItemLabel";
-            availabilityDateLabel.className = "cardItemLabel";
+            dateAvailableLabel.className = "cardItemLabel";
             priceLabel.className = "cardItemLabel";
             city.className = "cardItemValue";
             address.className = "cardItemValue";
             area.className = "cardItemValue";
             airConditioning.className = "cardItemValue";
             yearBuilt.className = "cardItemValue";
-            availabilityDate.className = "cardItemValue";
+            dateAvailable.className = "cardItemValue";
             price.className = "cardItemValue";
 
             flatName.textContent = flat.name;
@@ -69,7 +69,7 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             areaLabel.textContent = allFlatsStrings.labels.area;
             airConditioningLabel.textContent = allFlatsStrings.labels.airConditioning;
             yearBuiltLabel.textContent = allFlatsStrings.labels.yearBuilt;
-            availabilityDate.textContent = allFlatsStrings.labels.availabilityDate;
+            dateAvailableLabel.textContent = allFlatsStrings.labels.dateAvailable;
             priceLabel.textContent = allFlatsStrings.labels.rentPrice;
 
             cardImg.src = flat.imageSrc;
@@ -79,7 +79,7 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             area.textContent = `${flat.areaSize} m²`;
             airConditioning.textContent = flat.hasAC ? allFlatsStrings.options.yes : allFlatsStrings.options.no;
             yearBuilt.textContent = flat.yearBuilt;
-            availabilityDate.textContent = flat.availabilityDate;
+            dateAvailable.textContent = flat.dateAvailable;
             price.textContent = `$${flat.rentPrice}`;
             favorite.alt = allFlatsStrings.favorite.alt;
 
@@ -106,8 +106,8 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             airConditioningDiv.appendChild(airConditioning);
             yearBuiltDiv.appendChild(yearBuiltLabel);
             yearBuiltDiv.appendChild(yearBuilt);
-            availabilityDateDiv.appendChild(availabilityDateLabel);
-            availabilityDateDiv.appendChild(availabilityDate);
+            dateAvailableDiv.appendChild(dateAvailableLabel);
+            dateAvailableDiv.appendChild(dateAvailable);
             priceDiv.appendChild(priceLabel);
             priceDiv.appendChild(price);
 
@@ -120,7 +120,7 @@ export const flatsGrid = (array, favoriteButton, grid, flatsContainer) => {
             card.appendChild(areaDiv);
             card.appendChild(airConditioningDiv);
             card.appendChild(yearBuiltDiv);
-            card.appendChild(availabilityDateDiv);
+            card.appendChild(dateAvailableDiv);
             card.appendChild(priceDiv);
             flatsGrid.appendChild(card);
         });

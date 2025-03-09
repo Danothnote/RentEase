@@ -1,1 +1,1 @@
-export let allFlatsArray = [];
+export let allFlatsArray = new Set();

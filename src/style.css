@@ -66,6 +66,7 @@ body {
   width: 30px;
   clip-path: circle(50%);
   object-fit: cover;
+  background-color: #fff;
 }
 
 /* Landing Banner */

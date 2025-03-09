@@ -5,8 +5,9 @@ export const profileStrings = {
     userImg: {
         label: "Arrastre aquí una foto",
         type: "img",
+        src: "src/assets/imageIcon.png",
         alt: "userImg",
-        id: "imgUpload",
+        id: "profileImg",
         valid: false,
     },
     editIcon: {

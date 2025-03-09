@@ -1,3 +1,4 @@
+import { isLoggedIn } from "../functions/isLoggedIn";
 import { pageRouter } from "../functions/pageRouter";
 import { landingStrings } from "../model/landing/landingStrings";
 import { pageModel } from "../model/pageModel";
@@ -23,7 +24,7 @@ primaryButton.addEventListener("click", () => {
     pageRouter(pageModel.list[3]);
 });
 secondaryButton.addEventListener("click", () => {
-    pageRouter(pageModel.list[4]);
+    isLoggedIn() ? pageRouter(pageModel.list[4]) : alert("Por favor inicie sesión primero");
 });
 
 landingTitleDiv.appendChild(landingTitle);

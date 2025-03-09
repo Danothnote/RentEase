@@ -1,41 +1,41 @@
-import landingScreen from "../screens/landingScreen";
-import loginScreen from "../screens/loginScreen";
-import signupScreen from "../screens/signupScreen";
+import { createLandingScreen } from "../screens/landingScreen";
+import { createLoginScreen } from "../screens/loginScreen";
+import { createSignupScreen } from "../screens/signupScreen";
 import { pageModel } from "../model/pageModel";
-import newFlatScreen from "../screens/newFlatScreen";
-import allFlatsScreen from "../screens/allFlatsScreen";
-import profileScreen from "../screens/profileScreen";
+import { createNewFlatScreen } from "../screens/newFlatScreen";
+import { createProfileScreen } from "../screens/profileScreen";
+import { addFlatsArray } from "./allFlats/addFlatsArray";
 
 export const pageRouter = (page) => {
     const contentScreen = document.querySelector("#contentScreen");
     switch (page) {
         case pageModel.list[0]:
             pageModel.actual = pageModel.list[0];
-            contentScreen.replaceChildren(landingScreen);
+            contentScreen.replaceChildren(createLandingScreen());
             break;
         case pageModel.list[1]:
             pageModel.actual = pageModel.list[1];
-            contentScreen.replaceChildren(loginScreen);
+            contentScreen.replaceChildren(createLoginScreen());
             break;
         case pageModel.list[2]:
             pageModel.actual = pageModel.list[2];
-            contentScreen.replaceChildren(signupScreen);
+            contentScreen.replaceChildren(createSignupScreen());
             break;
         case pageModel.list[3]:
             pageModel.actual = pageModel.list[3];
-            contentScreen.replaceChildren(allFlatsScreen);
+            addFlatsArray(contentScreen);
             break;
         case pageModel.list[4]:
             pageModel.actual = pageModel.list[4];
-            contentScreen.replaceChildren(newFlatScreen);
+            contentScreen.replaceChildren(createNewFlatScreen());
             break;
         case pageModel.list[5]:
             pageModel.actual = pageModel.list[5];
-            contentScreen.replaceChildren(profileScreen);
+            contentScreen.replaceChildren(createProfileScreen());
             break;
         default:
             pageModel.actual = pageModel.list[0];
-            contentScreen.replaceChildren(landingScreen);
+            contentScreen.replaceChildren(createLandingScreen());
             break;
     }
 }

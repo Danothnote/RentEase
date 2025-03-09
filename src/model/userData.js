@@ -1,5 +1,5 @@
-import { addUser } from "../functions/navbar/addUser";
+import { User } from "../classes/userClass";
 
 export const userData = {
-    userClass: addUser(),
+    userClass: new User(),
 }

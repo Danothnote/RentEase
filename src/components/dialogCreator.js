@@ -1,6 +1,7 @@
+import { updateUser } from "../functions/profile/updateUser";
 import { profileStrings } from "../model/profile/profileStrings";
 
-export const dialogCreator = (title, placeholder, type, primaryButtonFunction) => {
+export const dialogCreator = (title, placeholder, type, id) => {
     const dialog = document.createElement("dialog");
     const dialogContent = document.createElement("div");
     const dialogTitle = document.createElement("h2");
@@ -59,7 +60,7 @@ export const dialogCreator = (title, placeholder, type, primaryButtonFunction) =
 
     // Agregando funcionalidad a los botones del dialogo
     dialogPrimaryButton.addEventListener("click", () => {
-        primaryButtonFunction;
+        updateUser(id, dialogInput);
         dialogInput.value = null;
         dialog.close();
     });

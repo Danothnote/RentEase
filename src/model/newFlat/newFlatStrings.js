@@ -3,12 +3,10 @@ export const newFlatStrings = {
     left: [
         {
             label: "Suba fotos del departamento",
-            placeholder: "",
             type: "img",
-            src: "",
             alt: "flatImg",
             id: "imgUpload",
-            valid: true,
+            valid: false,
         },
         {
             label: "Área",
@@ -85,4 +83,5 @@ export const newFlatStrings = {
     dragImgIconSrc: "src/assets/upload.webp",
     dragImgIconAlt: "icon",
     uploadButtonLabel: "Subir fotos",
+    uploadButtonID: "uploadButton",
 }

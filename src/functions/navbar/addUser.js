@@ -1,5 +1,12 @@
-import { User } from "../../classes/userClass";
+import { profileStrings } from "../../model/profile/profileStrings";
+import { userData } from "../../model/userData";
 
-export const addUser = () => {
-    return new User('daniel123', 'daniel@correo.com', 'Hola1234%', 'Daniel', 'Salazar', '1991-03-25', "src/assets/avatar.avif");
+export const addUser = (user) => {
+    userData.userClass.username = user.username;
+    userData.userClass.email = user.email;
+    userData.userClass.firstName = user.firstName;
+    userData.userClass.lastName = user.lastName;
+    userData.userClass.birthday = user.birthday;
+    user.profileImg ? userData.userClass.profileImg = user.profileImg : userData.userClass.profileImg = profileStrings.userImg.src;
+    userData.userClass.id = user.id;
 }
