@@ -1,20 +1,56 @@
 import { pageModel } from "../pageModel";
 
-export const navBarModel = [
-    {
-        page: pageModel.list[0],
-        label: "Inicio"
+export const navBarModel = {
+    logo: {
+        src: "src/assets/logo.webp",
+        alt: "logo"
     },
-    {
-        page: pageModel.list[3],
-        label: "Departamentos"
+    avatar: {
+        id: "avatar",
+        alt: "avatar",
     },
-    {
-        page: pageModel.list[4],
-        label: "Publica Ya!"
+    userDiv: {
+        id: "userDiv",
     },
-    {
-        page: "#footer",
-        label: "Nosotros"
-    }
-]
+    profileMenu: {
+        id: "profileMenu",
+    },
+    profileLink: {
+        label: "Mi Perfil",
+        id: "profileLink",
+    },
+    greetings: {
+        label: "Hola, ",
+        id: "greetings",
+    },
+    loginButton: {
+        label: "Iniciar Sesión",
+        id: "loginButton",
+    },
+    logoutButton: {
+        label: "Cerrar Sesión",
+        id: "logoutButton",
+    },
+    pages: [
+        {
+            page: pageModel.list[0],
+            label: "Inicio",
+            id: "homeLink",
+        },
+        {
+            page: pageModel.list[3],
+            label: "Departamentos",
+            id: "allFlatsLink",
+        },
+        {
+            page: pageModel.list[4],
+            label: "Publica Ya!",
+            id: "newFlatLink",
+        },
+        {
+            page: "#footer",
+            label: "Nosotros",
+            id: "aboutUsLink",
+        },
+    ]
+}

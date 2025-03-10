@@ -1,76 +1,117 @@
-import { isLoggedIn } from "../functions/isLoggedIn";
+import { verifyLoggedState } from "../functions/navbar/verifyLoggedState";
 import { pageRouter } from "../functions/pageRouter";
 import { logout } from "../functions/pocketbase/logout";
 import { navBarModel } from "../model/navbar/navbarModel";
 import { pageModel } from "../model/pageModel";
-import { profileStrings } from "../model/profile/profileStrings";
+import { userData } from "../model/userData";
 
-// Declaración de elementos del navbar
-const navbar = document.createElement("div");
-const logoLink = document.createElement("a");
-const logo = document.createElement("img");
-export const sections = document.createElement("div");
-export const avatar = document.createElement("img");
-export const loginButton = document.createElement("button");
-const user = JSON.parse(localStorage.getItem("auth"));
+export const createNavbar = () => {
+    // Declaración de elementos del navbar
+    const navbar = document.createElement("div");
+    const logoLink = document.createElement("a");
+    const logo = document.createElement("img");
+    const sections = document.createElement("div");
+    const userDiv = document.createElement("div");
+    const avatar = document.createElement("img");
+    const greetings = document.createElement("span");
+    const profileMenu = document.createElement("div");
+    const logoutButton = document.createElement("a");
+    const profileLink = document.createElement("a");
+    const loginButton = document.createElement("button");
 
-// Agregando clases a los elementos al navbar
-navbar.className = "navbar";
-logoLink.className = "logoLink";
-logo.className = "logo";
-sections.className = "sections";
-avatar.className = "avatar";
-avatar.id = "avatar";
-isLoggedIn() ? avatar.style.display = "block" : avatar.style.display = "none";
-loginButton.className = "loginButton";
-loginButton.id = "loginButton";
-isLoggedIn() ? loginButton.style.display = "none" : loginButton.style.display = "true";
+    // Agregando clases a los elementos al navbar
+    navbar.className = "navbar";
+    logoLink.className = "logoLink";
+    logo.className = "logo";
+    sections.className = "sections";
+    userDiv.className = "userDiv";
+    greetings.className = "section";
+    profileMenu.className = "profileMenu";
+    logoutButton.className = "logoutButton";
+    profileLink.className = "profileLink";
+    avatar.className = "avatar";
+    loginButton.className = "loginButton";
+    userDiv.id = navBarModel.userDiv.id;
+    profileMenu.id = navBarModel.profileMenu.id;
+    profileMenu.style.display = "none";
+    avatar.id = navBarModel.avatar.id;
+    avatar.alt = navBarModel.avatar.alt;
+    greetings.textContent = `${navBarModel.greetings.label} ${userData.userClass.firstName} ${userData.userClass.lastName}`;
+    greetings.id = navBarModel.greetings.id;
+    profileLink.textContent = navBarModel.profileLink.label;
+    profileLink.style.cursor = "pointer";
+    logoutButton.textContent = navBarModel.logoutButton.label;
+    logoutButton.style.cursor = "pointer";
+    loginButton.textContent = navBarModel.loginButton.label;
+    loginButton.id = navBarModel.loginButton.id;
 
-// Agregando funcionalidad al boton de inicio de sesión
-loginButton.textContent = "Iniciar Sesión";
-loginButton.addEventListener("click", () => {
-    pageRouter(pageModel.list[1]);
-});
+    // Agregando funcionalidad al menú del usuario
+    let menuShow = false;
+    userDiv.addEventListener("click", () => {
+        menuShow = !menuShow;
+        menuShow ? profileMenu.style.display = "block" : profileMenu.style.display = "none";
+    });
 
-//Agregando funcionalidad al avatar
-user ? avatar.src = user.profileImg : avatar.src = profileStrings.userImg.src;
-avatar.alt = "avatar";
-avatar.addEventListener("click", () => {
-    logout();
-});
+    // Agregando funcionalidad al boton de inicio de sesión
+    loginButton.addEventListener("click", () => {
+        pageRouter(pageModel.list[1]);
+    });
 
-// Agregando logo y su funcionalidad
-logoLink.addEventListener("click", () => {
-    pageRouter(pageModel.list[5]);
-})
-logoLink.style.cursor = "pointer";
-logo.src = "src/assets/logo.webp";
-logo.alt = "logo";
-
-//Agregando al navbar los enlaces de las secciones
-navBarModel.forEach(element => {
-    const section = document.createElement("a");
-    if (element.label === "Nosotros") {
-        section.href = element.page;
+    if (verifyLoggedState()) {
+        userDiv.style.display = "flex";
+        loginButton.style.display = "none";
     } else {
-        section.addEventListener("click", () => {
-            pageRouter(element.page);
-        })
+        userDiv.style.display = "none";
+        loginButton.style.display = "block";
     }
-    if (element.label === "Publica Ya!") {
-        section.id = "newFlatLink";
-        isLoggedIn() ? section.style.display = "block" : section.style.display = "none";
-    }
-    section.style.cursor = "pointer";
-    section.textContent = element.label;
-    sections.appendChild(section);
-})
 
-//Insertando todos los elementos al navbar
-logoLink.appendChild(logo);
-navbar.appendChild(logoLink);
-sections.appendChild(avatar);
-sections.appendChild(loginButton);
-navbar.appendChild(sections);
+    profileLink.addEventListener("click", () => {
+        pageRouter(pageModel.list[5]);
+    });
 
-export default navbar;
+    //Agregando funcionalidad al boton de cerrar sesión
+    logoutButton.addEventListener("click", () => {
+        logout();
+    });
+
+    // Agregando logo y su funcionalidad
+    logoLink.addEventListener("click", () => {
+        pageRouter(pageModel.list[0]);
+    })
+    logoLink.style.cursor = "pointer";
+    logo.src = navBarModel.logo.src;
+    logo.alt = navBarModel.logo.alt;
+
+    //Agregando al navbar los enlaces de las secciones
+    navBarModel.pages.forEach(element => {
+        const section = document.createElement("a");
+        if (element.label === "Nosotros") {
+            section.href = element.page;
+        } else {
+            section.addEventListener("click", () => {
+                pageRouter(element.page);
+            })
+        }
+        if (element.label === "Publica Ya!") {
+            verifyLoggedState() ? section.style.display = "block" : section.style.display = "none"; 
+        }
+        section.id = element.id;
+        section.style.cursor = "pointer";
+        section.textContent = element.label;
+        sections.appendChild(section);
+    })
+
+    //Insertando todos los elementos al navbar
+    logoLink.appendChild(logo);
+    profileMenu.appendChild(profileLink);
+    profileMenu.appendChild(logoutButton);
+    userDiv.appendChild(avatar);
+    userDiv.appendChild(greetings);
+    userDiv.appendChild(profileMenu);
+    sections.appendChild(userDiv);
+    sections.appendChild(loginButton);
+    navbar.appendChild(logoLink);
+    navbar.appendChild(sections);
+
+    return navbar;
+}

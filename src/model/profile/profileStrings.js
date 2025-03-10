@@ -5,7 +5,7 @@ export const profileStrings = {
     userImg: {
         label: "Arrastre aquí una foto",
         type: "img",
-        src: "src/assets/imageIcon.png",
+        src: "src/assets/imageIcon.webp",
         alt: "userImg",
         id: "profileImg",
         valid: false,
@@ -67,8 +67,8 @@ export const profileStrings = {
     secondaryButton: "Cerrar Sesión",
     dialogPrimaryButton: "Actualizar",
     dialogSecundaryButton: "Cancelar",
-    dragImgLabel: "Arrastra y suelta tus fotos aquí",
-    dragImgIconSrc: "src/assets/upload.webp",
-    dragImgIconAlt: "icon",
+    dropImgLabel: "Arrastra y suelta tus fotos aquí",
+    dropImgIconSrc: "src/assets/upload.webp",
+    dropImgIconAlt: "icon",
     uploadButtonLabel: "Subir fotos",
 }

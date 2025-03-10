@@ -7,7 +7,7 @@ import { pb } from "./newPocketbase";
 export const logout = () => {
     pb.authStore.clear();
     localStorage.removeItem("auth");
-    changeLogged();
+    changeLogged(false);
     clearInputs();
     pageRouter(pageModel.list[0]);
 }

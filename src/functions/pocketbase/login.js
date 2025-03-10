@@ -1,6 +1,8 @@
+import { navBarModel } from "../../model/navbar/navbarModel";
 import { pageModel } from "../../model/pageModel";
 import { profileStrings } from "../../model/profile/profileStrings";
 import { clearInputs } from "../clearInputs";
+import { addUser } from "../navbar/addUser";
 import { changeLogged } from "../navbar/changeLogged";
 import { pageRouter } from "../pageRouter";
 import { pb } from "./newPocketbase";
@@ -11,11 +13,16 @@ export const login = async (email, password) => {
     } else {
         const auth = await pb.collection("users").authWithPassword(email, password);
         const profileImageUrl = await pb.files.getURL(auth.record, auth.record.profileImg);
+        const avatar = document.getElementById(navBarModel.avatar.id);
+
         auth.record.profileImg = profileImageUrl;
         localStorage.setItem("auth", JSON.stringify(auth.record));
-        profileImageUrl ? document.getElementById("avatar").src = profileImageUrl : document.getElementById("avatar").src = profileStrings.userImg.src;
+        profileImageUrl ? avatar.src = profileImageUrl : avatar.src = profileStrings.userImg.src;
+        document.getElementById(navBarModel.greetings.id).textContent = `${navBarModel.greetings.label} ${auth.record.firstName} ${auth.record.lastName}`
+        
+        addUser(auth.record);
         clearInputs();
-        changeLogged();
+        changeLogged(true);
         pageRouter(pageModel.list[0]);
     }
 }

@@ -1,11 +1,13 @@
 import contentScreen from "./screens/contentScreen";
-import footerDiv from "./components/footer";
-import navbar from "./components/navbar";
+import { createFooter } from "./components/footer";
+import { createNavbar } from "./components/navbar";
 import { pageRouter } from "./functions/pageRouter";
 import { pageModel } from "./model/pageModel";
+import { isLoggedIn } from "./functions/isLoggedIn";
 
-document.querySelector("#app").appendChild(navbar);
+isLoggedIn();
+document.querySelector("#app").appendChild(createNavbar());
 document.querySelector("#app").appendChild(contentScreen);
-document.querySelector("#app").appendChild(footerDiv);
+document.querySelector("#app").appendChild(createFooter());
 pageRouter(pageModel.actual);
 

@@ -4,6 +4,7 @@ import { pageRouter } from "../functions/pageRouter";
 import { logout } from "../functions/pocketbase/logout";
 import { pageModel } from "../model/pageModel";
 import { profileStrings } from "../model/profile/profileStrings";
+import { userData } from "../model/userData";
 
 export const createProfileScreen = () => {
     const profileScreen = document.createElement("div");
@@ -20,7 +21,7 @@ export const createProfileScreen = () => {
     const formTitle = document.createElement("h1");
     const formPrimaryButton = document.createElement("button");
     const formSecondaryButton = document.createElement("button");
-    const user = JSON.parse(localStorage.getItem("auth"));
+    // const user = JSON.parse(localStorage.getItem("auth"));
 
     profileScreen.className = "profileScreen";
     screenGrandient.className = "containerGradient";
@@ -38,7 +39,7 @@ export const createProfileScreen = () => {
     profileChangeImg.className = "profileEditIcon";
 
     formTitle.textContent = profileStrings.title;
-    user.profileImg ? profileImg.src = user.profileImg : profileImg.src = profileStrings.userImg.src;
+    profileImg.src = userData.userClass.profileImg;
     profileImg.alt = profileStrings.userImg.alt;
     profileImg.id = profileStrings.userImg.id;
     profileChangeImg.src = profileStrings.editIcon.src;
@@ -64,19 +65,19 @@ export const createProfileScreen = () => {
 
         switch (element.id) {
             case "username":
-                itemValue.textContent = user.username;
+                itemValue.textContent = userData.userClass.username;
                 break;
             case "firstName":
-                itemValue.textContent = user.firstName;
+                itemValue.textContent = userData.userClass.firstName;
                 break;
             case "lastName":
-                itemValue.textContent = user.lastName;
+                itemValue.textContent = userData.userClass.lastName;
                 break;
             case "birthday":
-                itemValue.textContent = user.birthday.split(" ")[0];
+                itemValue.textContent = userData.userClass.birthday.split(" ")[0];
                 break;
             case "email":
-                itemValue.textContent = user.email;
+                itemValue.textContent = userData.userClass.email;
                 break;
         }
 

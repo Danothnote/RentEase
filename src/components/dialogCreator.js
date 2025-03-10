@@ -1,4 +1,5 @@
 import { updateUser } from "../functions/profile/updateUser";
+import { errorStrings } from "../model/errorStrings";
 import { profileStrings } from "../model/profile/profileStrings";
 
 export const dialogCreator = (title, placeholder, type, id) => {
@@ -23,30 +24,51 @@ export const dialogCreator = (title, placeholder, type, id) => {
     // Agregando valores a los elementos del dialog
     if (type === "img") {
         const imgContainer = document.createElement("div");
-        const img = document.createElement("div");
-        const dragLabelDiv = document.createElement("div");
-        const dragLabel = document.createElement("p");
-        const dragLabelIcon = document.createElement("img");
-        
+        const dropImg = document.createElement("div");
+        const dropLabelDiv = document.createElement("div");
+        const dropLabel = document.createElement("p");
+        const dropLabelIcon = document.createElement("img");
+
         dialogTitle.textContent = profileStrings.dialogImgTitle;
         imgContainer.className = "imgContainer";
-        img.className = "dragImg";
-        dragLabelDiv.className = "dragLabelDiv";
-        dragLabel.className = "dragLabel";
-        dragLabelIcon.className = "dragLabelIcon";
+        dropImg.className = "dropImg";
+        dropLabelDiv.className = "dropLabelDiv";
+        dropLabel.className = "dropLabel";
+        dropLabelIcon.className = "dropLabelIcon";
         dialogInput.style.marginTop = "35px";
         dialogInput.style.backgroundColor = "white";
         dialogInput.type = "file";
-        dialogInput.accept = "image/*";
+        dialogInput.accept = "image/jpeg, image/png, image/webp, image/gif, image/svg+xml";
 
-        dragLabel.textContent = profileStrings.dragImgLabel;
-        dragLabelIcon.alt = profileStrings.dragImgIconAlt;
-        dragLabelIcon.src = profileStrings.dragImgIconSrc;
+        dropLabel.textContent = profileStrings.dropImgLabel;
+        dropLabelIcon.alt = profileStrings.dropImgIconAlt;
+        dropLabelIcon.src = profileStrings.dropImgIconSrc;
 
-        dragLabelDiv.appendChild(dragLabelIcon);
-        dragLabelDiv.appendChild(dragLabel);
-        img.appendChild(dragLabelDiv);
-        imgContainer.appendChild(img);
+        dropImg.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            dropImg.style.backgroundColor = "lightgray";
+        });
+
+        dropImg.addEventListener("drop", (event) => {
+            event.preventDefault();
+            dropImg.style.backgroundColor = "white";
+            const files = event.dataTransfer.files;
+            const imageTypeJpg = "image/jpeg";
+            const imageTypePng = "image/png";
+            const imageTypeWebP = "image/webp";
+            const imageTypeGIF = "image/gif";
+            const imageTypeSVG = "image/svg+xml";
+            if (files[0].type.match(imageTypeJpg) || files[0].type.match(imageTypePng) || files[0].type.match(imageTypeWebP) || files[0].type.match(imageTypeGIF) || files[0].type.match(imageTypeSVG)) {
+                dialogInput.files = event.dataTransfer.files;
+            } else {
+                alert(errorStrings.fileTypeError);
+            }
+        });
+
+        dropLabelDiv.appendChild(dropLabelIcon);
+        dropLabelDiv.appendChild(dropLabel);
+        dropImg.appendChild(dropLabelDiv);
+        imgContainer.appendChild(dropImg);
         imgContainer.appendChild(dialogInput);
         dialogContent.appendChild(imgContainer);
     } else {

@@ -47,36 +47,58 @@ export const createNewFlatScreen = () => {
 
         if (element.type === "img") {
             const imgContainer = document.createElement("div");
-            const img = document.createElement("div");
-            const dragLabelDiv = document.createElement("div");
-            const dragLabel = document.createElement("p");
-            const dragLabelIcon = document.createElement("img");
+            const dropImg = document.createElement("div");
+            const dropLabelDiv = document.createElement("div");
+            const dropLabel = document.createElement("p");
+            const dropLabelIcon = document.createElement("img");
             const uploadButton = document.createElement("input");
 
             imgContainer.className = "imgContainer";
-            img.className = "dragImg";
-            dragLabelDiv.className = "dragLabelDiv";
-            dragLabel.className = "dragLabel";
-            dragLabelIcon.className = "dragLabelIcon";
+            dropImg.className = "dropImg";
+            dropLabelDiv.className = "dropLabelDiv";
+            dropLabel.className = "dropLabel";
+            dropLabelIcon.className = "dropLabelIcon";
             uploadButton.className = "formInput";
             uploadButton.id = newFlatStrings.uploadButtonID;
             uploadButton.style.marginTop = "35px";
             uploadButton.style.backgroundColor = "white";
 
-            dragLabel.textContent = newFlatStrings.dragImgLabel;
+            dropLabel.textContent = newFlatStrings.dropImgLabel;
             uploadButton.type = "file";
-            uploadButton.accept = "image/*";
-            dragLabelIcon.alt = newFlatStrings.dragImgIconAlt;
-            dragLabelIcon.src = newFlatStrings.dragImgIconSrc;
+            uploadButton.accept = "image/jpeg, image/png, image/webp, image/gif, image/svg+xml";
+            dropLabelIcon.alt = newFlatStrings.dropImgIconAlt;
+            dropLabelIcon.src = newFlatStrings.dropImgIconSrc;
+
+            dropImg.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropImg.style.backgroundColor = "lightgray";
+            });
+
+            dropImg.addEventListener("drop", (event) => {
+                event.preventDefault();
+                dropImg.style.backgroundColor = "white";
+                const files = event.dataTransfer.files;
+                const imageTypeJpg = "image/jpeg";
+                const imageTypePng = "image/png";
+                const imageTypeWebP = "image/webp";
+                const imageTypeGIF = "image/gif";
+                const imageTypeSVG = "image/svg+xml";
+                if (files[0].type.match(imageTypeJpg) || files[0].type.match(imageTypePng) || files[0].type.match(imageTypeWebP) || files[0].type.match(imageTypeGIF) || files[0].type.match(imageTypeSVG)) {
+                    uploadButton.files = event.dataTransfer.files;
+                    element.valid = true;
+                } else {
+                    alert(errorStrings.fileTypeError);
+                }
+            });
 
             uploadButton.addEventListener("change", () => {
                 uploadButton.files[0] !== undefined ? element.valid = true : element.valid = false;
             });
 
-            dragLabelDiv.appendChild(dragLabelIcon);
-            dragLabelDiv.appendChild(dragLabel);
-            img.appendChild(dragLabelDiv);
-            imgContainer.appendChild(img);
+            dropLabelDiv.appendChild(dropLabelIcon);
+            dropLabelDiv.appendChild(dropLabel);
+            dropImg.appendChild(dropLabelDiv);
+            imgContainer.appendChild(dropImg);
             imgContainer.appendChild(uploadButton);
             formInputContainerLeft.appendChild(imgContainer);
         } else {

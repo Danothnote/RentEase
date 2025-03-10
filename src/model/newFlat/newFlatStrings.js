@@ -79,9 +79,9 @@ export const newFlatStrings = {
     ],
     primary: "Publicar",
     secondary: "Cancelar",
-    dragImgLabel: "Arrastra y suelta tus fotos aquí",
-    dragImgIconSrc: "src/assets/upload.webp",
-    dragImgIconAlt: "icon",
+    dropImgLabel: "Arrastra y suelta tus fotos aquí",
+    dropImgIconSrc: "src/assets/upload.webp",
+    dropImgIconAlt: "icon",
     uploadButtonLabel: "Subir fotos",
     uploadButtonID: "uploadButton",
 }

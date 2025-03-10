@@ -1,9 +1,9 @@
-import landingBanner from "../components/landingBanner";
-import reviews from "../components/reviews";
+import { createLandingBanner } from "../components/landingBanner";
+import { createReviews } from "../components/reviews";
 
 export const createLandingScreen = () => {
     const landingScreen = document.createElement("div");
-    landingScreen.append(landingBanner, reviews)
+    landingScreen.append(createLandingBanner(), createReviews());
 
     return landingScreen;
 }
