@@ -31,6 +31,10 @@ export const navBarModel = {
         label: "Cerrar Sesión",
         id: "logoutButton",
     },
+    hamburgerButton: {
+        src: "src/assets/hamburger.webp",
+        alt: "hamburger",
+    },
     pages: [
         {
             page: pageModel.list[0],

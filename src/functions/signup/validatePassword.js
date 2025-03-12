@@ -13,8 +13,10 @@ export const validatePassword = () => {
     for (let element of document.getElementsByClassName("formValidation")) {
         if (element.style.color === "red") {
             signupStrings.right[1].valid = false;
+            signupStrings.right[2].valid = false;
         } else {
             signupStrings.right[1].valid = true;
+            signupStrings.right[2].valid = true;
         }
     }
 }

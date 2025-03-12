@@ -1,9 +1,13 @@
+import { substractYears } from "../../functions/signup/substractYears";
+
 export const profileStrings = {
     title: "Perfil de Usuario",
     dialogTitle: "Coloque el nuevo valor para ",
     dialogImgTitle: "Actualice su foto de perfil",
+    dialogInputLabel: "O seleccione un archivo aquí",
     userImg: {
         label: "Arrastre aquí una foto",
+        labelMobile: "Seleccione un archivo aquí",
         type: "img",
         src: "src/assets/imageIcon.webp",
         alt: "userImg",
@@ -14,6 +18,8 @@ export const profileStrings = {
         src: "src/assets/editIcon.webp",
         alt: "changeIcon",
     },
+    textValidation: ["Debe tener al menos 2 caracteres"],
+    dateValidation: ["Debes ser mayor de 18 años"],
     right: [
         {
             label: "Nombre de usuario: ",
@@ -26,43 +32,28 @@ export const profileStrings = {
             placeholder: "Ej: Juan",
             type: "text",
             id: "firstName",
-            valid: false,
         },
         {
             label: "Apellido: ",
             placeholder: "Ej: Castillo",
             type: "text",
             id: "lastName",
-            valid: false,
         },
         {
             label: "Fecha de nacimiento: ",
             placeholder: "Ej: 1990-01-01",
+            min: substractYears(120),
+            max: substractYears(18),
             type: "date",
             id: "birthday",
-            valid: false,
         },
         {
             label: "Email: ",
             placeholder: "Ej: usuario@correo.com",
             type: "email",
             id: "email",
-            valid: false,
         },
     ],
-    password: {
-        label: "Contraseña",
-        placeholder: "Ej: Contraseña1*",
-        type: "password",
-        id: "password",
-        valid: false,
-    },
-    confirmPassword: {
-        label: "Confirmar contraseña",
-        placeholder: "Ej: Contraseña1*",
-        type: "password",
-        id: "confirmPassword",
-    },
     primaryButton: "Regresar",
     secondaryButton: "Cerrar Sesión",
     dialogPrimaryButton: "Actualizar",

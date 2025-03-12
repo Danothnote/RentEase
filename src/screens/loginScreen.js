@@ -1,3 +1,5 @@
+import { createErrorDialog } from "../components/errorDialog";
+import { createLoadingDialog } from "../components/loadingDialog";
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
 import { login } from "../functions/pocketbase/login";
@@ -8,6 +10,8 @@ export const createLoginScreen = () => {
     // Declarando elementos de la pantalla de Login
     const loginScreen = document.createElement('div');
     const screenGrandient = document.createElement("div");
+    const loadingDialog = createLoadingDialog();
+    const errorDialog = createErrorDialog();
     const formContainer = document.createElement("div");
     const formInputContainer = document.createElement("div");
     const formTitle = document.createElement("h1");
@@ -41,12 +45,13 @@ export const createLoginScreen = () => {
     loginInputPassword.type = loginStrings.password.type;
     loginInputPassword.id = loginStrings.password.id;
     loginInputPassword.placeholder = loginStrings.password.placeholder;
+    formPrimaryButton.disabled = true;
     formPrimaryButton.textContent = loginStrings.submit;
     formSecondaryButton.textContent = loginStrings.signup;
 
     // Agregando eventos a los botones
     formPrimaryButton.addEventListener("click", async () => {
-        login(loginInputUsername.value, loginInputPassword.value);
+        login(loginInputUsername.value, loginInputPassword.value, loadingDialog, errorDialog);
     });
 
     formSecondaryButton.addEventListener("click", () => {
@@ -55,13 +60,16 @@ export const createLoginScreen = () => {
     });
 
     // Validando el input del username
-    loginInputUsername.addEventListener("keyup", () => {
+    loginInputUsername.addEventListener("input", () => {
+        loginInputUsername.value = loginInputUsername.value.toLowerCase();
         loginInputUsername.value !== "" ? loginStrings.username.valid = true : loginStrings.username.valid = false;
+        loginStrings.username.valid && loginStrings.password.valid ? formPrimaryButton.disabled = false : formPrimaryButton.disabled = true;
     });
 
     // Validando el input del password
-    loginInputPassword.addEventListener("keyup", () => {
+    loginInputPassword.addEventListener("input", () => {
         loginInputPassword.value !== "" ? loginStrings.password.valid = true : loginStrings.password.valid = false;
+        loginStrings.username.valid && loginStrings.password.valid ? formPrimaryButton.disabled = false : formPrimaryButton.disabled = true;
     });
 
     // Agregando los elementos al login screen
@@ -73,6 +81,8 @@ export const createLoginScreen = () => {
     formInputContainer.appendChild(loginInputPassword);
     formContainer.appendChild(formPrimaryButton);
     formContainer.appendChild(formSecondaryButton);
+    screenGrandient.appendChild(loadingDialog);
+    screenGrandient.appendChild(errorDialog);
     screenGrandient.appendChild(formContainer);
     loginScreen.appendChild(screenGrandient);
 

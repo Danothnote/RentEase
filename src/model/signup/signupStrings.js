@@ -1,3 +1,5 @@
+import { substractYears } from "../../functions/signup/substractYears";
+
 export const signupStrings = {
     title: "Registro",
     username: {
@@ -6,6 +8,7 @@ export const signupStrings = {
         type: "text",
         id: "userName",
         valid: false,
+        validation: ["Debe tener al menos 2 caracteres"],
     },
     left: [
         {
@@ -14,6 +17,7 @@ export const signupStrings = {
             type: "text",
             id: "firstName",
             valid: false,
+            validation: ["Debe tener al menos 2 caracteres"],
         },
         {
             label: "Apellido",
@@ -21,13 +25,17 @@ export const signupStrings = {
             type: "text",
             id: "lastName",
             valid: false,
+            validation: ["Debe tener al menos 2 caracteres"],
         },
         {
             label: "Fecha de nacimiento",
             placeholder: "Ej: 1990-01-01",
+            min: substractYears(120),
+            max: substractYears(18),
             type: "date",
             id: "birthday",
             valid: false,
+            validation: ["Debes ser mayor de 18 años"],
         },
     ],
     right: [
@@ -37,6 +45,7 @@ export const signupStrings = {
             type: "email",
             id: "email",
             valid: false,
+            validation: ["Debe ser un email válido"],
         },
         {
             label: "Contraseña",
@@ -50,6 +59,7 @@ export const signupStrings = {
             placeholder: "Ej: Contraseña1*",
             type: "password",
             id: "confirmPassword",
+            valid: false,
         },
     ],
     submit: "Registrarse",

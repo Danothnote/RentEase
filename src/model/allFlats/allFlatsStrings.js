@@ -24,6 +24,8 @@ export const allFlatsStrings = {
         favoriteIconAlt: "Favoritos",
     },
     filter: {
+        iconSrc: "src/assets/filter.webp",
+        iconAlt: "Filter",
         label: "Filtros",
         filters: [
             {

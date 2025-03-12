@@ -10,12 +10,14 @@ import { fillSelect } from "../functions/fillSelect";
 import { allFlatsStrings } from "../model/allFlats/allFlatsStrings";
 import { favoriteFlatsSet } from "../model/allFlats/favoriteFlatsSet";
 import { filteredArray } from "../model/allFlats/filteredArray";
+import { menuShowModel } from "../model/navbar/menuShowModel";
 
 export const createAllFlatsScreen = () => {
     const allFlatsScreen = document.createElement("div");
     const inputContainer = document.createElement("div");
     const searchBar = document.createElement("input");
     const filterSideBar = document.createElement("div");
+    const filterIcon = document.createElement("img");
     const filterSideBarTitle = document.createElement("h2");
     const sortLabel = document.createElement("h2");
     const selectSort = document.createElement("select");
@@ -41,17 +43,20 @@ export const createAllFlatsScreen = () => {
     flatsFilterContainer.className = "flatsFilterContainer";
     flatsContainer.className = "flatsContainer";
     filterSideBar.className = "filterSideBar";
+    filterIcon.className = "filterIcon";
     filterSideBarTitle.className = "formTitle";
     flatsTablePagination.className = "flatsTablePagination";
 
     // Agregando propiedades a los elementos
     searchBar.placeholder = allFlatsStrings.searchBar.placeholder;
     tableIcon.src = allFlatsStrings.toggleButton.tableIconOff;
-    tableIcon.alt = allFlatsStrings.toggleButton.tableIconAlt
+    tableIcon.alt = allFlatsStrings.toggleButton.tableIconAlt;
     gridIcon.src = allFlatsStrings.toggleButton.gridIconOn;
     gridIcon.alt = allFlatsStrings.toggleButton.gridIconAlt;
     favoriteButton.src = allFlatsStrings.favoriteButton.favoriteIconOff;
     favoriteButton.alt = allFlatsStrings.favoriteButton.favoriteIconAlt;
+    filterIcon.src = allFlatsStrings.filter.iconSrc;
+    filterIcon.alt = allFlatsStrings.filter.iconAlt;
     filterSideBarTitle.textContent = allFlatsStrings.filter.label;
 
     // Agregando funcionalidad al botón de estilo
@@ -78,6 +83,11 @@ export const createAllFlatsScreen = () => {
         searchFilter(searchBar.value.toLowerCase());
         resetFilters();
         updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
+    });
+
+    filterIcon.addEventListener("click", () => {
+        menuShowModel.allFlatsSidebar = !menuShowModel.allFlatsSidebar;
+        filterSideBar.style.display = menuShowModel.allFlatsSidebar ? "none" : "block";
     });
 
     // Agregando funcionalidad al selector de filtro
@@ -111,7 +121,22 @@ export const createAllFlatsScreen = () => {
         updateFlats(gridIcon.classList.contains("active"), Array.from(allFlatsStrings.allFlatsArray), favoriteButton, flatsContainer);
     });
 
+    if (menuShowModel.mediaQ527.matches) {
+        menuShowModel.allFlatsSidebar = true;
+    }
+
+    menuShowModel.mediaQ527.onchange = (event) => {
+        if (event.matches) {
+            filterSideBar.style.display = "none";
+            menuShowModel.allFlatsSidebar = true;
+        } else {
+            menuShowModel.allFlatsSidebar = false;
+            filterSideBar.style.display = "block";
+        }
+    };
+
     // Agregando los elementos a la pantalla de allFlatsScreen
+    inputContainer.appendChild(filterIcon);
     inputContainer.appendChild(searchBar);
     inputContainer.appendChild(styleButtonDiv);
     inputContainer.appendChild(favoriteButton);

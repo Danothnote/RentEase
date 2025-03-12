@@ -6,12 +6,12 @@ body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #000;
 }
 
 /* Navbar */
 .navbar {
   background-color: #1d3141;
-  height: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -24,22 +24,24 @@ body {
 }
 
 .logo {
+  padding-block: 5px;
   height: 40px;
 }
 
 .sections {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
 }
 
 .section,
 .sections a {
+  height: 50px;
   text-decoration: none;
   color: #ffe8bc;
   font-weight: bold;
   padding-inline: 30px;
+  align-content: center;
 }
 
 .sections a:hover {
@@ -47,8 +49,8 @@ body {
 }
 
 .userDiv {
+  height: 50px;
   align-items: center;
-  border-left: 1px dotted #fcf6d0;
   padding-left: 30px;
   position: relative;
 }
@@ -61,17 +63,27 @@ body {
   cursor: pointer;
 }
 
+.userDiv::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 30px;
+  border-right: 1px dotted #fcf6d0;
+}
+
 .profileMenu {
-  display: flex;
+  display: none;
+  width: 200px;
   border-radius: 10px;
   text-align: center;
   background-color: #1d3141;
   position: absolute;
-  top: 140%;
-  z-index: 1;
+  top: 55px;
+  z-index: 99;
 }
 
 .profileMenu a {
+  height: 20px;
   display: block;
   padding: 20px 30px;
 }
@@ -83,6 +95,7 @@ body {
 }
 
 .loginButton {
+  align-self: center;
   height: 20px;
   background-color: transparent;
   color: #ffe8bc;
@@ -106,6 +119,15 @@ body {
   background-color: #fff;
 }
 
+.hamburgerButton {
+  display: none;
+  width: 30px;
+  cursor: pointer;
+  padding: 15px;
+  position: absolute;
+  right: 20px;
+}
+
 /* Landing Banner */
 .landingBanner {
   background-image: url("./assets/landingWallpaper.webp");
@@ -114,6 +136,8 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  position: relative;
 }
 
 .landingTitleDiv {
@@ -121,22 +145,24 @@ body {
   border-radius: 10px;
   position: relative;
   top: 20%;
-  align-self: center;
+  width: fit-content;
+  margin-inline: auto;
+  padding-inline: 10px;
 }
 
 .landingTitle {
   font-size: 3em;
   color: #fcf6d0;
-  text-align: center;
   margin: 0px;
+  text-align: center;
 }
 
 .landingButtons {
-  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  top: 40%;
+  top: 38%;
 }
 
 .landingButtons a {
@@ -148,12 +174,13 @@ body {
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
+  margin-inline: 100px;
+  margin-block: 20px;
 }
 
 .landingPrimaryButton {
   color: #1d3141;
   background-color: #ffe8bc;
-  margin-right: 20%;
 }
 
 .landingPrimaryButton:hover {
@@ -190,7 +217,7 @@ body {
 
 .review {
   width: 225px;
-  margin-top: 30px;
+  margin: 30px;
   background-color: #fff;
   border-radius: 10px;
 }
@@ -251,6 +278,13 @@ body {
   z-index: -1;
 }
 
+.allFlatsScreen {
+  background-color: #fff;
+  margin: 0px;
+  padding-block: 20px;
+  overflow: scroll;
+}
+
 .signupScreen {
   background-image: url("./assets/registro.webp");
 }
@@ -268,11 +302,7 @@ body {
 }
 
 .containerGradient {
-  background-image: linear-gradient(
-    to left,
-    #4b7ea780,
-    #00000080
-  );
+  background-image: linear-gradient(to left, #4b7ea780, #00000080);
   height: fit-content;
   width: 100%;
   position: relative;
@@ -282,6 +312,7 @@ body {
 
 /* Form */
 .dialogContainer,
+.errorDialogContainer,
 .signupFormContainer,
 .formContainer {
   background-color: #ffffffe6;
@@ -290,8 +321,19 @@ body {
   width: fit-content;
 }
 
-.dialogContainer {
+.formContainer {
+  margin-inline: 30px;
+}
+
+.dialogContainer,
+.errorDialogContainer {
   background-color: #ffffff;
+  margin-inline: 20px;
+  justify-self: center;
+}
+
+.errorDialogContainer button {
+  justify-self: center;
 }
 
 .formTitle {
@@ -300,8 +342,16 @@ body {
 }
 
 .gridFormInputContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.formInputDiv {
+  display: block;
+  justify-self: center;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .formLabel {
@@ -355,7 +405,7 @@ body {
   width: 100px;
   border-radius: 10px;
   cursor: pointer;
-  margin: 30px 0px;
+  margin: 10px 0px;
   display: block;
   margin-inline: 20px;
 }
@@ -363,6 +413,14 @@ body {
 .formPrimaryButton {
   color: #ffe8bc;
   background-color: #1d3141;
+}
+
+.formPrimaryButton:disabled,
+.formPrimaryButton:disabled:hover {
+  background-color: #d9d9d9;
+  color: darkgrey;
+  border: none;
+  cursor: not-allowed;
 }
 
 .formContainer .formPrimaryButton,
@@ -376,6 +434,13 @@ body {
 
 .formInputContainerRight .formSecondaryButton {
   justify-self: start;
+}
+
+.formButtonsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .formPrimaryButton:hover {
@@ -405,7 +470,7 @@ body {
   border: 2px dashed #1d3141;
   color: #1d3141;
   border-radius: 10px;
-  height: 127px;
+  height: 135px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -414,6 +479,25 @@ body {
 
 .dropLabelIcon {
   height: 2em;
+}
+
+/* Validations */
+.validationDiv {
+  display: none;
+  background-color: #ffe8bc;
+  border-radius: 0px 0px 10px 10px;
+  padding: 5px 20px;
+  font-size: 0.85em;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: fit-content;
+}
+
+.validationDiv p {
+  margin: 0;
 }
 
 /* allFlats */
@@ -452,24 +536,37 @@ body {
 
 .flatsFilterContainer {
   margin-block: 20px;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
+  display: flex;
 }
 
 .filterSideBar {
   justify-items: center;
 }
 
+.filterIcon {
+  height: 40px;
+  cursor: pointer;
+  margin-inline: 10px;
+}
+
+.flatsContainer {
+  width: fit-content;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
 /* Flats Grid */
 .flatsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
   padding-inline: 20px;
 }
 
 .flatCard {
   background-color: #d9d9d9;
+  width: 300px;
+  margin-inline: 10px;
+  margin-bottom: 20px;
   border-radius: 10px;
   padding-bottom: 30px;
 }
@@ -571,6 +668,10 @@ tr:nth-of-type(even) {
   position: relative;
 }
 
+.profileScreen .labelContainer {
+  padding-block: 5px;
+}
+
 .profileEditIcon {
   height: 1em;
   margin-left: 20px;
@@ -620,7 +721,8 @@ tr:nth-of-type(even) {
 }
 
 .footerContainer {
-  width: 30%;
+  width: 350px;
+  margin-inline: auto;
   justify-items: center;
 }
 
@@ -631,6 +733,7 @@ tr:nth-of-type(even) {
 
 .footerListItem {
   padding: 5px;
+  width: 100%;
 }
 
 .footerLink {
@@ -643,4 +746,67 @@ tr:nth-of-type(even) {
   object-fit: contain;
   margin-right: 10px;
   vertical-align: middle;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 1039px) {
+  /* Navbar */
+  .navbar {
+    justify-content: center;
+  }
+
+  .sections {
+    background-color: #1d3141;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 832px) {
+  /* Navbar */
+  .sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .userDiv::before {
+    content: none;
+  }
+}
+
+@media only screen and (max-width: 584px) {
+  .sections {
+    display: none;
+    position: absolute;
+    top: 50px;
+    z-index: 2;
+  }
+
+  .hamburgerButton {
+    display: block;
+  }
+
+  .section,
+  .sections a {
+    padding-inline: 10px;
+  }
+
+  .loginButton {
+    margin-bottom: 15px;
+    margin-inline: 95px;
+  }
+
+  .filterSideBar {
+    display: none;
+  }
+
+  .dialogContainer,
+  .errorDialogContainer,
+  .formContainer {
+    width: 310px;
+  }
 }

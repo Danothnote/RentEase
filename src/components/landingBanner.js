@@ -2,9 +2,11 @@ import { verifyLoggedState } from "../functions/navbar/verifyLoggedState";
 import { pageRouter } from "../functions/pageRouter";
 import { landingStrings } from "../model/landing/landingStrings";
 import { pageModel } from "../model/pageModel";
+import { createLoginDialog } from "./loginDialog";
 
 export const createLandingBanner = () => {
     const landingBanner = document.createElement("div");
+    const loginDialog = createLoginDialog();
     const landingTitleDiv = document.createElement("div");
     const landingTitle = document.createElement("h1");
     const landingButtons = document.createElement("div");
@@ -27,13 +29,13 @@ export const createLandingBanner = () => {
     });
 
     secondaryButton.addEventListener("click", () => {
-        verifyLoggedState() ? pageRouter(pageModel.list[4]) : alert("Por favor inicie sesión primero");
+        verifyLoggedState() ? pageRouter(pageModel.list[4]) : loginDialog.showModal();
     });
 
     landingTitleDiv.appendChild(landingTitle);
     landingButtons.appendChild(primaryButton);
     landingButtons.appendChild(secondaryButton);
-
+    landingBanner.appendChild(loginDialog);
     landingBanner.appendChild(landingTitleDiv);
     landingBanner.appendChild(landingButtons);
 

@@ -1,4 +1,6 @@
 import { dialogCreator } from "../components/dialogCreator";
+import { createErrorDialog } from "../components/errorDialog";
+import { createLoadingDialog } from "../components/loadingDialog";
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
 import { logout } from "../functions/pocketbase/logout";
@@ -9,6 +11,8 @@ import { userData } from "../model/userData";
 export const createProfileScreen = () => {
     const profileScreen = document.createElement("div");
     const screenGrandient = document.createElement("div");
+    const loadingDialog = createLoadingDialog();
+    const errorDialog = createErrorDialog();
     const formContainer = document.createElement("div");
     const formInputContainer = document.createElement("div");
     const formLeftContainer = document.createElement("div");
@@ -21,7 +25,6 @@ export const createProfileScreen = () => {
     const formTitle = document.createElement("h1");
     const formPrimaryButton = document.createElement("button");
     const formSecondaryButton = document.createElement("button");
-    // const user = JSON.parse(localStorage.getItem("auth"));
 
     profileScreen.className = "profileScreen";
     screenGrandient.className = "containerGradient";
@@ -45,7 +48,7 @@ export const createProfileScreen = () => {
     profileChangeImg.src = profileStrings.editIcon.src;
     profileChangeImg.alt = profileStrings.editIcon.alt;
     profileChangeDiv.style.cursor = "pointer";
-    const dialog = dialogCreator("", "", profileStrings.userImg.type, profileStrings.userImg.id);
+    const dialog = dialogCreator("", "", profileStrings.userImg.type, profileStrings.userImg.id, loadingDialog, errorDialog);
 
     profileChangeDiv.addEventListener("click", () => {
         dialog.showModal();
@@ -56,7 +59,7 @@ export const createProfileScreen = () => {
         const itemLabel = document.createElement("span");
         let itemValue = document.createElement("span");
         const editIcon = document.createElement("img");
-        const dialog = dialogCreator(element.label, element.placeholder, element.type, element.id);
+        const dialog = dialogCreator(element.label, element.placeholder, element.type, element.id, loadingDialog, errorDialog);
 
         itemDiv.className = "labelContainer";
         itemLabel.className = "cardItemLabel";
@@ -78,6 +81,7 @@ export const createProfileScreen = () => {
                 break;
             case "email":
                 itemValue.textContent = userData.userClass.email;
+                editIcon.style.display = "none";
                 break;
         }
 
@@ -123,6 +127,8 @@ export const createProfileScreen = () => {
     buttonsDiv.appendChild(formSecondaryButton);
     formContainer.appendChild(dialog);
     formContainer.appendChild(buttonsDiv);
+    screenGrandient.appendChild(loadingDialog);
+    screenGrandient.appendChild(errorDialog);
     screenGrandient.appendChild(formContainer);
     profileScreen.appendChild(screenGrandient);
 
