@@ -1,73 +1,47 @@
 import { updateUser } from "../functions/profile/updateUser";
 import { errorDialogStrings } from "../model/errorDialogStrings";
 import { errorStrings } from "../model/errorStrings";
-import { validateTypes } from "../model/validateTypes";
 import { profileStrings } from "../model/profile/profileStrings";
 import { validationDiv } from "./validationDiv";
+import { createButton } from "./button";
+import { createImgInput } from "./imgInput";
+import { validateTypes } from "../model/validateTypes";
+import { createInput } from "./input";
+import { clearInputs } from "../functions/clearInputs";
+import { createTitle } from "./title";
 
 export const dialogCreator = (title, placeholder, type, id, loadingDialog, errorDialog) => {
     const dialog = document.createElement("dialog");
     const dialogContent = document.createElement("div");
-    const dialogInputDiv = document.createElement("div");
-    const dialogTitle = document.createElement("h2");
-    const dialogInput = document.createElement("input");
+    const dialogTitle = createTitle(type === "img" ? profileStrings.dialogImgTitle : profileStrings.dialogTitle + title, "h2");
     const dialogButtonContainer = document.createElement("div");
-    const dialogPrimaryButton = document.createElement("button");
-    const dialogSecondaryButton = document.createElement("button");
+    const dialogPrimaryButton = createButton(profileStrings.dialogPrimaryButton, true);
+    const dialogSecondaryButton = createButton(profileStrings.dialogSecundaryButton, false);
+    let dialogInputValue = null;
 
     // Asignando clases a los elementos
     dialog.className = "dialogContainer";
     dialogContent.className = "dialogContent";
-    dialogTitle.className = "formTitle";
-    dialogInput.className = "formInput";
     dialogButtonContainer.className = "profileButtonsDiv";
-    dialogPrimaryButton.className = "formPrimaryButton";
     dialogPrimaryButton.disabled = true;
-    dialogSecondaryButton.className = "formSecondaryButton";
     dialogContent.appendChild(dialogTitle);
 
     // Agregando valores a los elementos del dialog
     if (type === "img") {
-        const imgContainer = document.createElement("div");
-        const dropImg = document.createElement("div");
-        const dropLabelDiv = document.createElement("div");
-        const dialogUploadDiv = document.createElement("div");
-        const dropLabel = document.createElement("p");
-        const dropLabelIcon = document.createElement("img");
-        const dialogInputLabel = document.createElement("p");
-
-        dialogTitle.textContent = profileStrings.dialogImgTitle;
-        imgContainer.className = "imgContainer";
-        dropImg.className = "dropImg";
-        dropLabelDiv.className = "dropLabelDiv";
-        dropLabel.className = "dropLabel";
-        dropLabelIcon.className = "dropLabelIcon";
-        dialogUploadDiv.className = "formInputDiv";
-        dialogInputLabel.className = "formLabel";
-        dialogInputLabel.textContent = profileStrings.dialogInputLabel;
-        dialogUploadDiv.style.marginTop = "30px";
-        dialogInput.style.backgroundColor = "white";
-        dialogInput.type = "file";
-        dialogInput.accept = `${validateTypes.jpg}, ${validateTypes.png}, ${validateTypes.webp}, ${validateTypes.gif}, ${validateTypes.svg}`;
-
-        dropLabel.textContent = profileStrings.dropImgLabel;
-        dropLabelIcon.alt = profileStrings.dropImgIconAlt;
-        dropLabelIcon.src = profileStrings.dropImgIconSrc;
-
-        dropImg.addEventListener("dragover", (event) => {
-            event.preventDefault();
-            dropImg.style.backgroundColor = "lightgray";
-        });
+        const imgInput = createImgInput();
+        const dropImg = imgInput.childNodes[0];
+        const dialogInput = imgInput.childNodes[1].childNodes[1];
 
         dropImg.addEventListener("drop", (event) => {
             event.preventDefault();
-            dropImg.style.backgroundColor = "white";
+            dropImg.style.backgroundColor = "Transparent";
             const files = event.dataTransfer.files;
+
             if (files[0].type.match(validateTypes.jpg) || files[0].type.match(validateTypes.png) || files[0].type.match(validateTypes.webp) || files[0].type.match(validateTypes.gif) || files[0].type.match(validateTypes.svg)) {
                 dialogInput.files = event.dataTransfer.files;
                 dialogPrimaryButton.disabled = false;
+                dialogInputValue = dialogInput.files[0];
             } else {
-                dialogPrimaryButton.disabled = true;
                 document.getElementById(errorDialogStrings.messageID).textContent = errorStrings.fileTypeError;
                 errorDialog.showModal();
             }
@@ -76,32 +50,16 @@ export const dialogCreator = (title, placeholder, type, id, loadingDialog, error
         dialogInput.addEventListener("input", () => {
             if (dialogInput.files[0]) {
                 dialogPrimaryButton.disabled = false;
+                dialogInputValue = dialogInput.files[0];
             } else {
                 dialogPrimaryButton.disabled = true;
             }
         });
 
-        if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-            dropImg.style.display = "none";
-            dialogInputLabel.textContent = profileStrings.userImg.labelMobile;
-            dialogUploadDiv.style.marginTop = "0px";
-        }
-
-        dropLabelDiv.appendChild(dropLabelIcon);
-        dropLabelDiv.appendChild(dropLabel);
-        dialogUploadDiv.appendChild(dialogInputLabel);
-        dialogUploadDiv.appendChild(dialogInput);
-        dropImg.appendChild(dropLabelDiv);
-        imgContainer.appendChild(dropImg);
-        imgContainer.appendChild(dialogUploadDiv);
-        dialogInputDiv.appendChild(imgContainer);
-        dialogContent.appendChild(dialogInputDiv);
+        dialogContent.appendChild(imgInput);
     } else {
-        dialogInputDiv.className = "formInputDiv";
-        dialogTitle.textContent = profileStrings.dialogTitle + title;
-        dialogInput.type = type;
-        dialogInput.placeholder = placeholder;
-        dialogInputDiv.appendChild(dialogInput);
+        const dialogInputDiv = createInput("", placeholder, type, id);
+        const dialogInput = dialogInputDiv.childNodes[0];
 
         if (type === "text") {
             const dialogInputValidation = validationDiv(profileStrings.textValidation);
@@ -127,10 +85,12 @@ export const dialogCreator = (title, placeholder, type, id, loadingDialog, error
             if (id === profileStrings.right[0].id) {
                 dialogInput.addEventListener("input", () => {
                     dialogInput.value = dialogInput.value.toLowerCase();
+                    dialogInputValue = dialogInput.value;
                 });
             } else {
                 dialogInput.addEventListener("input", () => {
                     dialogInput.value = String(dialogInput.value).charAt(0).toUpperCase() + String(dialogInput.value).slice(1);
+                    dialogInputValue = dialogInput.value;
                 });
             }
         } else {
@@ -142,6 +102,7 @@ export const dialogCreator = (title, placeholder, type, id, loadingDialog, error
                 if (dialogInput.value !== "" && dialogInput.value >= profileStrings.right[3].min && dialogInput.value <= profileStrings.right[3].max) {
                     dialogInputValidation.style.display = "none";
                     dialogPrimaryButton.disabled = false;
+                    dialogInputValue = dialogInput.value;
                 } else {
                     dialogInputValidation.style.display = "block";
                     dialogPrimaryButton.disabled = true;
@@ -151,21 +112,22 @@ export const dialogCreator = (title, placeholder, type, id, loadingDialog, error
 
         dialogContent.appendChild(dialogInputDiv);
     }
-    dialogPrimaryButton.textContent = profileStrings.dialogPrimaryButton;
-    dialogSecondaryButton.textContent = profileStrings.dialogSecundaryButton;
 
     // Agregando funcionalidad a los botones del dialogo
     dialogPrimaryButton.addEventListener("click", () => {
-        if (dialogInput.value === undefined || dialogInput.value === null || dialogInput.value === "") {
+        if (dialogInputValue === undefined || dialogInputValue === null || dialogInputValue === "") {
             document.getElementById(errorDialogStrings.messageID).textContent = errorStrings.fillInputsError.label;
             errorDialog.showModal();
         } else {
-            updateUser(id, dialogInput, dialog, loadingDialog);
+            document.querySelector(".formInput").value = null;
+            updateUser(id, dialogInputValue, dialog, loadingDialog, errorDialog);
+            dialogInputValue = null;
         }
     });
 
     dialogSecondaryButton.addEventListener("click", () => {
-        dialogInput.value = null;
+        clearInputs();
+        dialogInputValue = null;
         dialog.close();
     });
 

@@ -14,6 +14,6 @@ export const loginStrings = {
         id: "password",
         valid: false,
     },
-    submit: "Iniciar Sesión",
-    signup: "Registrarse"
+    primaryButton: "Iniciar Sesión",
+    secondaryButton: "Registrarse"
 }

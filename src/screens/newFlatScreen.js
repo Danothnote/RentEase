@@ -9,6 +9,10 @@ import { validateTypes } from "../model/validateTypes";
 import { newFlatStrings } from "../model/newFlat/newFlatStrings";
 import { pageModel } from "../model/pageModel";
 import { validationDiv } from "../components/validationDiv";
+import { createButton } from "../components/button";
+import { createImgInput } from "../components/imgInput";
+import { createInput } from "../components/input";
+import { createTitle } from "../components/title";
 
 export const createNewFlatScreen = () => {
     // Declarando elementos de la pantalla de newFlat
@@ -17,81 +21,43 @@ export const createNewFlatScreen = () => {
     const loadingDialog = createLoadingDialog();
     const errorDialog = createErrorDialog();
     const formContainer = document.createElement("div");
-    const formTitle = document.createElement("h1");
+    const formTitle = createTitle(newFlatStrings.title, "h1");
     const formInputs = document.createElement("div");
     const gridFormInputContainer = document.createElement("div");
     const formInputContainerLeft = document.createElement("div");
     const formInputContainerRight = document.createElement("div");
-    const formImgContainer = document.createElement("div");
     const formButtonsContainer = document.createElement("div");
-    const formImgLabel = document.createElement("p");
-    const formImgShow = document.createElement("img");
-    const formPrimaryButton = document.createElement("button");
-    const formSecondaryButton = document.createElement("button");
+    const formPrimaryButton = createButton(newFlatStrings.primaryButton, true);
+    const formSecondaryButton = createButton(newFlatStrings.secondaryButton, false);
 
     // Agregando clases a los elementos al newFlat screen
     newFlatScreen.className = "newFlatScreen";
     screenGradient.className = "containerGradient";
     formContainer.className = "formContainer";
-    formTitle.className = "formTitle";
     formInputs.className = "formInputContainer";
     gridFormInputContainer.className = "gridFormInputContainer";
     formInputContainerLeft.className = "formInputContainerLeft";
     formInputContainerRight.className = "formInputContainerRight";
-    formImgContainer.className = "formImgContainer";
-    formImgLabel.className = "formImgLabel";
-    formImgShow.className = "formImgShow";
     formButtonsContainer.className = "formButtonsContainer";
-    formPrimaryButton.className = "formPrimaryButton";
     formSecondaryButton.className = "formSecondaryButton";
-    
+
     // Agregando propiedades a los elementos
-    formTitle.textContent = newFlatStrings.title;
     formPrimaryButton.disabled = true;
 
     newFlatStrings.left.forEach(element => {
-        const inputDiv = document.createElement("div");
-        const label = document.createElement("p");
-        label.className = "formLabel";
-        label.textContent = element.label;
-
         if (element.type === "img") {
-            const imgContainer = document.createElement("div");
-            const dropImg = document.createElement("div");
-            const dropLabelDiv = document.createElement("div");
-            const dropLabel = document.createElement("p");
-            const dropLabelIcon = document.createElement("img");
-            const uploadButtonDiv = document.createElement("div");
-            const uploadButtonLabel = document.createElement("p");
-            const uploadButton = document.createElement("input");
+            const label = document.createElement("p");
+            const imgInput = createImgInput();
+            const dropImg = imgInput.childNodes[0];
+            const uploadButton = imgInput.childNodes[1].childNodes[1];
 
-            imgContainer.className = "imgContainer";
-            dropImg.className = "dropImg";
-            dropLabelDiv.className = "dropLabelDiv";
-            dropLabel.className = "dropLabel";
-            dropLabelIcon.className = "dropLabelIcon";
-            uploadButtonDiv.className = "formInputDiv";
-            uploadButtonLabel.className = "formLabel";
-            uploadButton.className = "formInput";
-            uploadButton.id = newFlatStrings.uploadButtonID;
-            uploadButtonDiv.style.marginTop = "28px";
-            uploadButton.style.backgroundColor = "white";
-
-            dropLabel.textContent = newFlatStrings.dropImgLabel;
-            uploadButtonLabel.textContent = newFlatStrings.left[0].uploadButtonLabel;
-            uploadButton.type = "file";
-            uploadButton.accept = `${validateTypes.jpg}, ${validateTypes.png}, ${validateTypes.webp}, ${validateTypes.gif}, ${validateTypes.svg}`;
-            dropLabelIcon.alt = newFlatStrings.dropImgIconAlt;
-            dropLabelIcon.src = newFlatStrings.dropImgIconSrc;
-
-            dropImg.addEventListener("dragover", (event) => {
-                event.preventDefault();
-                dropImg.style.backgroundColor = "lightgray";
-            });
+            label.className = "formLabel";
+            label.textContent = element.label;
+            uploadButton.id = element.id;
 
             dropImg.addEventListener("drop", (event) => {
                 event.preventDefault();
-                dropImg.style.backgroundColor = "white";
+                dropImg.style.backgroundColor = "Transparent";
                 const files = event.dataTransfer.files;
 
                 if (files[0].type.match(validateTypes.jpg) || files[0].type.match(validateTypes.png) || files[0].type.match(validateTypes.webp) || files[0].type.match(validateTypes.gif) || files[0].type.match(validateTypes.svg)) {
@@ -109,32 +75,12 @@ export const createNewFlatScreen = () => {
                 newFlatStrings.left.every(input => input.valid) && newFlatStrings.right.every(input => input.valid) ? formPrimaryButton.disabled = false : formPrimaryButton.disabled = true;
             });
 
-            if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-                label.style.display = "none";
-                dropImg.style.display = "none";
-                uploadButtonLabel.textContent = newFlatStrings.left[0].labelMobile;
-                uploadButtonDiv.style.marginTop = "0px";
-            }
-            
-            imgContainer.appendChild(label);
-            dropLabelDiv.appendChild(dropLabelIcon);
-            dropLabelDiv.appendChild(dropLabel);
-            dropImg.appendChild(dropLabelDiv);
-            uploadButtonDiv.appendChild(uploadButtonLabel);
-            uploadButtonDiv.appendChild(uploadButton);
-            imgContainer.appendChild(dropImg);
-            imgContainer.appendChild(uploadButtonDiv);
-            inputDiv.appendChild(imgContainer);
-            formInputContainerLeft.appendChild(inputDiv);
+            formInputContainerLeft.appendChild(label);
+            formInputContainerLeft.appendChild(imgInput);
         } else {
-            inputDiv.appendChild(label);
-            const input = document.createElement("input");
+            const inputDiv = createInput(element.label, element.placeholder, element.type, element.id);
+            const input = inputDiv.childNodes[1];
             const validationInputDiv = validationDiv(element.validation);
-            inputDiv.className = "formInputDiv";
-            input.className = "formInput";
-            input.type = element.type;
-            input.placeholder = element.placeholder;
-            input.id = element.id;
 
             input.addEventListener("focus", () => {
                 validationInputDiv.style.display = "block";
@@ -188,10 +134,9 @@ export const createNewFlatScreen = () => {
                     break;
             }
 
-            if (element.id === "constructionDate") {
+            if (element.id === newFlatStrings.left[2].id) {
                 input.min = element.min;
                 input.max = element.max;
-                input.value = element.max;
             }
 
             inputDiv.appendChild(input);
@@ -201,36 +146,19 @@ export const createNewFlatScreen = () => {
     })
 
     newFlatStrings.right.forEach(element => {
-        const inputDiv = document.createElement("div");
-        const label = document.createElement("p");
-        inputDiv.className = "formInputDiv";
-        label.className = "formLabel";
-        label.textContent = element.label;
-
-        inputDiv.appendChild(label);
-
         if (element.type === "select") {
-            const select = document.createElement("select");
-            select.className = "formSelectInput";
-            element.options.forEach(option => {
-                const optionElement = document.createElement("option");
-                optionElement.textContent = option;
-                select.appendChild(optionElement);
-            });
-            select.id = element.id;
-            inputDiv.appendChild(select);
-            formInputContainerRight.appendChild(inputDiv);
-
+            const inputDiv = createInput(element.label, element.placeholder, element.type, element.id, element.options);
+            const select = inputDiv.childNodes[1];
+            
             select.addEventListener("input", () => {
                 newFlatStrings.left.every(input => input.valid) && newFlatStrings.right.every(input => input.valid) ? formPrimaryButton.disabled = false : formPrimaryButton.disabled = true;
             });
+            
+            formInputContainerRight.appendChild(inputDiv);
         } else {
-            const input = document.createElement("input");
+            const inputDiv = createInput(element.label, element.placeholder, element.type, element.id);
+            const input = inputDiv.childNodes[1];
             const validationInputDiv = validationDiv(element.validation);
-            input.className = "formInput";
-            input.type = element.type;
-            input.placeholder = element.placeholder;
-            input.id = element.id;
 
             input.addEventListener("focus", () => {
                 validationInputDiv.style.display = "block";
@@ -252,6 +180,7 @@ export const createNewFlatScreen = () => {
                     }
                 });
             } else if (element.id === newFlatStrings.right[5].id) {
+                input.min = element.min;
                 input.addEventListener("input", () => {
                     if (input.value !== "" && input.value > 0) {
                         element.valid = true;
@@ -275,7 +204,6 @@ export const createNewFlatScreen = () => {
                 })
             }
 
-            inputDiv.appendChild(input);
             inputDiv.appendChild(validationInputDiv);
             formInputContainerRight.appendChild(inputDiv);
         }
@@ -284,7 +212,7 @@ export const createNewFlatScreen = () => {
     // Agregando eventos a los botones
     formPrimaryButton.addEventListener("click", () => {
         if (newFlatStrings.left.every(input => input.valid) && newFlatStrings.right.every(input => input.valid)) {
-            uploadFlat(document.getElementById("uploadButton").files[0], document.getElementById("area").value, document.getElementById("yearBuilt").value, document.getElementById("dateAvailable").value, document.getElementById("flatName").value, document.getElementById("city").value, document.getElementById("street").value, document.getElementById("streetNumber").value, document.getElementById("airConditioning").value, document.getElementById("rentPrice").value, loadingDialog, errorDialog);
+            uploadFlat(document.getElementById(newFlatStrings.left[0].id).files[0], document.getElementById(`${newFlatStrings.left[1].id}Input`).value, document.getElementById(`${newFlatStrings.left[2].id}Input`).value, document.getElementById(`${newFlatStrings.left[3].id}Input`).value, document.getElementById(`${newFlatStrings.right[0].id}Input`).value, document.getElementById(`${newFlatStrings.right[1].id}Input`).value, document.getElementById(`${newFlatStrings.right[2].id}Input`).value, document.getElementById(`${newFlatStrings.right[3].id}Input`).value, document.getElementById(`${newFlatStrings.right[4].id}Input`).value, document.getElementById(`${newFlatStrings.right[5].id}Input`).value, loadingDialog, errorDialog);
         } else {
             document.getElementById(errorDialogStrings.messageID).textContent = errorStrings.fillInputsError.label;
             errorDialog.showModal();
@@ -297,8 +225,6 @@ export const createNewFlatScreen = () => {
     });
 
     // Agregando los botones
-    formPrimaryButton.textContent = newFlatStrings.primary;
-    formSecondaryButton.textContent = newFlatStrings.secondary;
     formButtonsContainer.appendChild(formPrimaryButton);
     formButtonsContainer.appendChild(formSecondaryButton);
 

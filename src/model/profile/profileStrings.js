@@ -4,10 +4,7 @@ export const profileStrings = {
     title: "Perfil de Usuario",
     dialogTitle: "Coloque el nuevo valor para ",
     dialogImgTitle: "Actualice su foto de perfil",
-    dialogInputLabel: "O seleccione un archivo aquí",
     userImg: {
-        label: "Arrastre aquí una foto",
-        labelMobile: "Seleccione un archivo aquí",
         type: "img",
         src: "src/assets/imageIcon.webp",
         alt: "userImg",
@@ -58,8 +55,4 @@ export const profileStrings = {
     secondaryButton: "Cerrar Sesión",
     dialogPrimaryButton: "Actualizar",
     dialogSecundaryButton: "Cancelar",
-    dropImgLabel: "Arrastra y suelta tus fotos aquí",
-    dropImgIconSrc: "src/assets/upload.webp",
-    dropImgIconAlt: "icon",
-    uploadButtonLabel: "Subir fotos",
 }

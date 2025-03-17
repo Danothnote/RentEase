@@ -543,6 +543,10 @@ body {
   justify-items: center;
 }
 
+.filterSideBar h2 {
+  margin-block: 20px 10px;
+}
+
 .filterIcon {
   height: 40px;
   cursor: pointer;

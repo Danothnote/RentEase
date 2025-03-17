@@ -33,9 +33,5 @@ export const pageRouter = (page) => {
             pageModel.actual = pageModel.list[5];
             contentScreen.replaceChildren(createProfileScreen());
             break;
-        default:
-            pageModel.actual = pageModel.list[0];
-            contentScreen.replaceChildren(createLandingScreen());
-            break;
     }
 }

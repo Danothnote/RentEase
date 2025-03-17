@@ -9,5 +9,6 @@ isLoggedIn();
 document.querySelector("#app").appendChild(createNavbar());
 document.querySelector("#app").appendChild(contentScreen);
 document.querySelector("#app").appendChild(createFooter());
-pageRouter(pageModel.actual);
 
+pageModel.actual = pageModel.list[0];
+pageRouter(pageModel.actual);

@@ -1,8 +1,8 @@
 import { signupStrings } from "../../model/signup/signupStrings";
 
 export const validatePassword = () => {
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const password = document.getElementById("passwordInput").value;
+    const confirmPassword = document.getElementById("confirmPasswordInput").value;
     password.length >= 8 ? document.getElementById("minLength").style.color = "green" : document.getElementById("minLength").style.color = "red";
     password.match(/[A-Z]/) ? document.getElementById("hasUppercase").style.color = "green" : document.getElementById("hasUppercase").style.color = "red";
     password.match(/[a-z]/) ? document.getElementById("hasLowercase").style.color = "green" : document.getElementById("hasLowercase").style.color = "red";

@@ -62,6 +62,6 @@ export const signupStrings = {
             valid: false,
         },
     ],
-    submit: "Registrarse",
-    cancel: "Cancelar"
+    primaryButton: "Registrarse",
+    secondaryButton: "Cancelar"
 }

@@ -1,12 +1,16 @@
 import { dialogCreator } from "../components/dialogCreator";
 import { createErrorDialog } from "../components/errorDialog";
 import { createLoadingDialog } from "../components/loadingDialog";
+import { createButton } from "../components/button";
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
 import { logout } from "../functions/pocketbase/logout";
 import { pageModel } from "../model/pageModel";
 import { profileStrings } from "../model/profile/profileStrings";
 import { userData } from "../model/userData";
+import { createTitle } from "../components/title";
+import { createItemDiv } from "../components/itemDiv";
+import { addUser } from "../functions/navbar/addUser";
 
 export const createProfileScreen = () => {
     const profileScreen = document.createElement("div");
@@ -22,26 +26,25 @@ export const createProfileScreen = () => {
     const profileImg = document.createElement("img");
     const profileChangeDiv = document.createElement("div");
     const profileChangeImg = document.createElement("img");
-    const formTitle = document.createElement("h1");
-    const formPrimaryButton = document.createElement("button");
-    const formSecondaryButton = document.createElement("button");
+    const formTitle = createTitle(profileStrings.title, "h1");
+    const formPrimaryButton = createButton(profileStrings.primaryButton, true);
+    const formSecondaryButton = createButton(profileStrings.secondaryButton, false);
 
     profileScreen.className = "profileScreen";
     screenGrandient.className = "containerGradient";
     formContainer.className = "formContainer";
-    formTitle.className = "formTitle";
     formInputContainer.className = "profileFormInputContainer";
     formLeftContainer.className = "formLeftContainer";
     formRightContainer.className = "formRightContainer";
     buttonsDiv.className = "profileButtonsDiv";
-    formPrimaryButton.className = "formPrimaryButton";
-    formSecondaryButton.className = "formSecondaryButton";
     profileImgDiv.className = "profileImgDiv";
     profileImg.className = "profileImg";
     profileChangeDiv.className = "profileChangeDiv";
     profileChangeImg.className = "profileEditIcon";
 
-    formTitle.textContent = profileStrings.title;
+    const user = JSON.parse(localStorage.getItem("auth"))
+    addUser(user);
+
     profileImg.src = userData.userClass.profileImg;
     profileImg.alt = profileStrings.userImg.alt;
     profileImg.id = profileStrings.userImg.id;
@@ -55,56 +58,35 @@ export const createProfileScreen = () => {
     });
 
     profileStrings.right.forEach(element => {
-        const itemDiv = document.createElement("div");
-        const itemLabel = document.createElement("span");
-        let itemValue = document.createElement("span");
-        const editIcon = document.createElement("img");
+        let itemValue = "";
         const dialog = dialogCreator(element.label, element.placeholder, element.type, element.id, loadingDialog, errorDialog);
-
-        itemDiv.className = "labelContainer";
-        itemLabel.className = "cardItemLabel";
-        itemValue.className = "cardItemValue";
-        editIcon.className = "profileEditIcon";
-
         switch (element.id) {
             case "username":
-                itemValue.textContent = userData.userClass.username;
+                itemValue = userData.userClass.getUsername();
                 break;
             case "firstName":
-                itemValue.textContent = userData.userClass.firstName;
+                itemValue = userData.userClass.getFirstName();
                 break;
             case "lastName":
-                itemValue.textContent = userData.userClass.lastName;
+                itemValue = userData.userClass.getLastName();
                 break;
             case "birthday":
-                itemValue.textContent = userData.userClass.birthday.split(" ")[0];
+                itemValue = userData.userClass.getBirthday().split(" ")[0];
                 break;
             case "email":
-                itemValue.textContent = userData.userClass.email;
-                editIcon.style.display = "none";
+                itemValue = userData.userClass.getEmail();
                 break;
         }
 
-        itemLabel.textContent = element.label;
-        itemValue.id = element.id;
-        editIcon.src = profileStrings.editIcon.src;
-        editIcon.alt = profileStrings.editIcon.alt;
-        editIcon.style.cursor = "pointer";
+        const itemDiv = createItemDiv(element.label, itemValue, element.id, profileStrings.editIcon.src, profileStrings.editIcon.alt);
+        const editIcon = itemDiv.childNodes[2];
         editIcon.addEventListener("click", () => {
             dialog.showModal();
         });
 
-        itemDiv.appendChild(itemLabel);
-        itemDiv.appendChild(itemValue);
-        itemDiv.appendChild(editIcon);
         formRightContainer.appendChild(dialog);
         formRightContainer.appendChild(itemDiv);
     });
-
-    formPrimaryButton.textContent = profileStrings.primaryButton;
-    formPrimaryButton.style.cursor = "pointer";
-    formSecondaryButton.textContent = profileStrings.secondaryButton;
-    formSecondaryButton.style.cursor = "pointer";
 
     formPrimaryButton.addEventListener("click", () => {
         clearInputs();

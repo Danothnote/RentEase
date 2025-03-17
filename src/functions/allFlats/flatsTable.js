@@ -1,3 +1,4 @@
+import { createTitle } from "../../components/title";
 import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
 import { favoriteFlatsSet } from "../../model/allFlats/favoriteFlatsSet";
 import { favoriteEvent } from "./favoriteEvent";
@@ -60,25 +61,15 @@ export const flatsTable = (array, favoriteButton, grid, flatsContainer) => {
             tdCity.textContent = flat.city;
             tdStreetName.textContent = flat.streetName;
             tdStreetNumber.textContent = flat.streetNumber;
-            tdAreaSize.textContent = flat.areaSize;
+            tdAreaSize.textContent = `${flat.areaSize} m²`;
             tdYearBuilt.textContent = flat.yearBuilt;
             tdDateAvailable.textContent = flat.dateAvailable;
-            tdRentPrice.textContent = flat.rentPrice;
+            tdRentPrice.textContent = `$${flat.rentPrice}`;
             tableImg.src = flat.imageSrc;
             tableImg.alt = allFlatsStrings.imgAlt;
             favorite.alt = allFlatsStrings.favorite.alt;
-
-            if (flat.hasAC) {
-                tdHasAC.textContent = "Si";
-            } else {
-                tdHasAC.textContent = "No";
-            }
-
-            if (favoriteFlatsSet.has(flat)) {
-                favorite.src = allFlatsStrings.favorite.favoriteIcon;
-            } else {
-                favorite.src = allFlatsStrings.favorite.unfavoriteIcon;
-            }
+            tdHasAC.textContent = flat.hasAC ? "Si" : "No";
+            favorite.src = favoriteFlatsSet.has(flat) ? allFlatsStrings.favorite.favoriteIcon : allFlatsStrings.favorite.unfavoriteIcon;
 
             favorite.addEventListener("click", () => {
                 favoriteEvent(favorite, flat);
@@ -109,9 +100,7 @@ export const flatsTable = (array, favoriteButton, grid, flatsContainer) => {
         flatsTable.appendChild(table);
     } else {
         flatsTable.classList.remove("flatsTable");
-        const emptyLabel = document.createElement("h1");
-        emptyLabel.className = "formTitle";
-        emptyLabel.textContent = allFlatsStrings.emptyLabel;
+        const emptyLabel = createTitle(allFlatsStrings.emptyLabel, "h1");
         flatsTable.appendChild(emptyLabel);
     }
 

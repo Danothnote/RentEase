@@ -11,7 +11,7 @@ export const updateUser = async (key, input, dialog, loadingDialog, errorDialog)
         loadingDialog.showModal();
         const userID = JSON.parse(localStorage.getItem("auth")).id;
         const data = new Object();
-        key === profileStrings.userImg.id ? data[key] = input.files[0] : data[key] = input.value;
+        data[key] = input;
         await pb.collection('users').update(userID, data);
 
         const auth = await pb.collection('users').getOne(userID);
@@ -26,11 +26,10 @@ export const updateUser = async (key, input, dialog, loadingDialog, errorDialog)
         } else {
             document.getElementById(key).textContent = userData.userClass[key];
         }
-        input.value = null;
         loadingDialog.close();
         dialog.close();
     } catch (error) {
-        console.log(error.response);
+        console.log(error.response.data);
         loadingDialog.close();
         switch (error.response.data[key].code) {
             case errorStrings.alredyExists.error:

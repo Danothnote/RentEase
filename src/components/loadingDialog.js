@@ -1,16 +1,12 @@
 import { loadingDialogStrings } from "../model/loadingDialogStrings";
+import { createTitle } from "./title";
 
 export const createLoadingDialog = () => {
     const loadingDialog = document.createElement("dialog");
-    const loadingTitle = document.createElement("h1");
-    const loadingMessage = document.createElement("h3");
+    const loadingTitle = createTitle(loadingDialogStrings.title, "h1");
+    const loadingMessage = createTitle(loadingDialogStrings.message, "h3");
 
     loadingDialog.className = "dialogContainer";
-    loadingTitle.className = "formTitle";
-    loadingMessage.className = "formTitle";
-
-    loadingTitle.textContent = loadingDialogStrings.title;
-    loadingMessage.textContent = loadingDialogStrings.message;
 
     loadingDialog.appendChild(loadingTitle);
     loadingDialog.appendChild(loadingMessage);

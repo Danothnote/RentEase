@@ -6,7 +6,7 @@ export const addUser = (user) => {
     userData.userClass.email = user.email;
     userData.userClass.firstName = user.firstName;
     userData.userClass.lastName = user.lastName;
-    userData.userClass.birthday = user.birthday;
+    userData.userClass.birthday = user.birthday.split(' ')[0];
     user.profileImg ? userData.userClass.profileImg = user.profileImg : userData.userClass.profileImg = profileStrings.userImg.src;
     userData.userClass.id = user.id;
 }

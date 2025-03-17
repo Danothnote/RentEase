@@ -1,5 +1,6 @@
 import { createErrorDialog } from "../components/errorDialog";
 import { createLoadingDialog } from "../components/loadingDialog";
+import { createButton } from "../components/button";
 import { validationDiv } from "../components/validationDiv";
 import { clearInputs } from "../functions/clearInputs";
 import { pageRouter } from "../functions/pageRouter";
@@ -11,6 +12,8 @@ import { pageModel } from "../model/pageModel";
 import { signupStrings } from "../model/signup/signupStrings";
 import { validationStrings } from "../model/signup/validationStrings";
 import { validateTypes } from "../model/validateTypes";
+import { createInput } from "../components/input";
+import { createTitle } from "../components/title";
 
 export const createSignupScreen = () => {
     // Declarando elementos de la pantalla de Registro
@@ -25,13 +28,13 @@ export const createSignupScreen = () => {
     const formInputContainerLeft = document.createElement("div");
     const formInputContainerRight = document.createElement("div");
     const formButtonsContainer = document.createElement("div");
-    const formInputDiv = document.createElement("div");
-    const formLabel = document.createElement("p");
-    const formInput = document.createElement("input");
-    const formTitle = document.createElement("h1");
-    const formPrimaryButton = document.createElement("button");
-    const formSecondaryButton = document.createElement("button");
+    const formInputDiv = createInput(signupStrings.username.label, signupStrings.username.placeholder, signupStrings.username.type, signupStrings.username.id);
+    const formTitle = createTitle(signupStrings.title, "h1")
+    const formPrimaryButton = createButton(signupStrings.primaryButton, true);
+    const formSecondaryButton = createButton(signupStrings.secondaryButton, false);
     const validationUsernameDiv = validationDiv(signupStrings.username.validation);
+
+    const formInput = formInputDiv.childNodes[1];
 
     // Asignando clases a los elementos
     signupScreen.className = "signupScreen";
@@ -40,21 +43,10 @@ export const createSignupScreen = () => {
     gridFormInputContainer.className = "gridFormInputContainer";
     formInputContainerLeft.className = "formInputContainerLeft";
     formInputContainerRight.className = "formInputContainerRight";
-    formTitle.className = "formTitle";
     signupForm.className = "signupForm";
-    formInputDiv.className = "formInputDiv";
-    formLabel.className = "formLabel";
-    formInput.className = "formInput";
     formButtonsContainer.className = "formButtonsContainer";
-    formPrimaryButton.className = "formPrimaryButton";
-    formSecondaryButton.className = "formSecondaryButton";
 
     // Asignando propiedades a los elementos
-    formTitle.textContent = signupStrings.title;
-    formLabel.textContent = signupStrings.username.label;
-    formInput.type = signupStrings.username.type;
-    formInput.id = signupStrings.username.id;
-    formInput.placeholder = signupStrings.username.placeholder;
     formPrimaryButton.disabled = true;
 
     formInput.addEventListener("focus", () => {
@@ -75,13 +67,11 @@ export const createSignupScreen = () => {
             formPrimaryButton.disabled = true;
         }
     });
-    formPrimaryButton.textContent = signupStrings.submit;
-    formSecondaryButton.textContent = signupStrings.cancel;
 
     // Agregando eventos a los botones
     formPrimaryButton.addEventListener("click", () => {
         if (signupStrings.username.valid && signupStrings.left[0].valid && signupStrings.left[1].valid && signupStrings.left[2].valid && signupStrings.right[0].valid && signupStrings.right[1].valid) {
-            signup(formInput.value, document.getElementById("firstName").value, document.getElementById("lastName").value, document.getElementById("birthday").value, document.getElementById("email").value, document.getElementById("password").value, document.getElementById("confirmPassword").value, loadingDialog, errorDialog);
+            signup(formInput.value, document.getElementById(`${signupStrings.left[0].id}Input`).value, document.getElementById(`${signupStrings.left[1].id}Input`).value, document.getElementById(`${signupStrings.left[2].id}Input`).value, document.getElementById(`${signupStrings.right[0].id}Input`).value, document.getElementById(`${signupStrings.right[1].id}Input`).value, document.getElementById(`${signupStrings.right[2].id}Input`).value, loadingDialog, errorDialog);
         } else {
             document.getElementById(errorDialogStrings.messageID).textContent = errorStrings.fillInputsError.label;
             errorDialog.showModal();
@@ -102,19 +92,9 @@ export const createSignupScreen = () => {
 
     // Creando los inputs y añadiendolos a los divs
     signupStrings.left.forEach(element => {
-        const inputDiv = document.createElement("div");
-        const label = document.createElement("p");
-        const input = document.createElement("input");
+        const inputDiv = createInput(element.label, element.placeholder, element.type, element.id)
         const validationInputDiv = validationDiv(element.validation);
-
-        inputDiv.className = "formInputDiv";
-        label.className = "formLabel";
-        input.className = "formInput";
-
-        label.textContent = element.label;
-        input.type = element.type;
-        input.placeholder = element.placeholder;
-        input.id = element.id;
+        const input = inputDiv.childNodes[1];
 
         input.addEventListener("focus", () => {
             validationInputDiv.style.display = "block";
@@ -123,9 +103,10 @@ export const createSignupScreen = () => {
             validationInputDiv.style.display = "none";
         });
 
-        if (input.id === "birthday") {
+        if (element.id === signupStrings.left[2].id) {
             input.min = signupStrings.left[2].min;
             input.max = signupStrings.left[2].max;
+
             input.addEventListener("input", () => {
                 if (input.value !== "" && input.value >= signupStrings.left[2].min && input.value <= signupStrings.left[2].max) {
                     element.valid = true;
@@ -136,7 +117,6 @@ export const createSignupScreen = () => {
                     validationInputDiv.style.display = "block";
                     formPrimaryButton.disabled = true;
                 }
-
             });
         } else {
             input.addEventListener("input", () => {
@@ -153,30 +133,15 @@ export const createSignupScreen = () => {
             });
         }
 
-        inputDiv.appendChild(label);
-        inputDiv.appendChild(input);
         inputDiv.appendChild(validationInputDiv);
         formInputContainerLeft.appendChild(inputDiv);
     });
 
     signupStrings.right.forEach(element => {
-        const inputDiv = document.createElement("div");
-        const label = document.createElement("p");
-        const input = document.createElement("input");
+        const inputDiv = createInput(element.label, element.placeholder, element.type, element.id)
+        const input = inputDiv.childNodes[1];
 
-        inputDiv.className = "formInputDiv";
-        label.className = "formLabel";
-        input.className = "formInput";
-
-        label.textContent = element.label;
-        input.type = element.type;
-        input.placeholder = element.placeholder;
-        input.id = element.id;
-
-        inputDiv.appendChild(label);
-        inputDiv.appendChild(input);
-
-        if (input.id === "password" || input.id === "confirmPassword") {
+        if (element.id === signupStrings.right[1].id || element.id === signupStrings.right[2].id) {
             input.addEventListener("input", () => {
                 validatePassword();
                 signupStrings.username.valid && signupStrings.left.every(input => input.valid) && signupStrings.right.every(input => input.valid) ? formPrimaryButton.disabled = false : formPrimaryButton.disabled = true;
@@ -219,8 +184,6 @@ export const createSignupScreen = () => {
 
     // Añadiendo los elementos a la pantalla de Registro
     formContainer.appendChild(formTitle);
-    formInputDiv.appendChild(formLabel);
-    formInputDiv.appendChild(formInput);
     formInputDiv.appendChild(validationUsernameDiv);
     signupForm.appendChild(formInputDiv);
     formButtonsContainer.appendChild(formPrimaryButton);

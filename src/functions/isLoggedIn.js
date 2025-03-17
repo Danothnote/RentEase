@@ -1,7 +1,9 @@
 import { navBarModel } from "../model/navbar/navbarModel";
+import { pageModel } from "../model/pageModel";
 import { profileStrings } from "../model/profile/profileStrings";
 import { userData } from "../model/userData";
 import { addUser } from "./navbar/addUser";
+import { pageRouter } from "./pageRouter";
 import { pb } from "./pocketbase/newPocketbase";
 
 export const isLoggedIn = async () => {
@@ -18,5 +20,7 @@ export const isLoggedIn = async () => {
             addUser(user);
             localStorage.setItem("auth", JSON.stringify(user));
         }
+    } else {
+        pageRouter(pageModel.list[0]);
     }
 }
