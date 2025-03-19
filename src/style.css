@@ -128,6 +128,28 @@ body {
   right: 20px;
 }
 
+/* Animations */
+.landingScreen,
+.signupScreen,
+.loginScreen,
+.profileScreen,
+.newFlatScreen,
+.allFlatsScreen {
+  animation: fadeIn 400ms ease-in-out;
+}
+
+.flatsGrid,
+.flatsTable,
+.filterSideBar {
+  animation: fadeIn 200ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
 /* Landing Banner */
 .landingBanner {
   background-image: url("./assets/landingWallpaper.webp");
@@ -200,7 +222,8 @@ body {
 
 /* Reviews */
 .reviews {
-  background-image: linear-gradient(#ffebc3, #d29234);
+  background-image: linear-gradient(#E3CAAB, #CBA093);
+  /* background-image: linear-gradient(#ffebc3, #d29234); */
   padding: 50px 5%;
 }
 

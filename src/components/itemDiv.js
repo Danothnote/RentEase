@@ -1,5 +1,4 @@
 export const createItemDiv = (label, value, id, editIcon, editIconAlt, cardItem) => {
-    console.log(cardItem);
     const itemDiv = document.createElement("div");
     itemDiv.className = cardItem ? "cardItem" : "labelContainer";
 

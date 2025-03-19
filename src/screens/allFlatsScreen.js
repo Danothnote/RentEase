@@ -40,6 +40,7 @@ export const createAllFlatsScreen = () => {
     flatsFilterContainer.className = "flatsFilterContainer";
     flatsContainer.className = "flatsContainer";
     filterSideBar.className = "filterSideBar";
+    filterSideBar.classList.add("slide-in");
     filterIcon.className = "filterIcon";
     flatsTablePagination.className = "flatsTablePagination";
 

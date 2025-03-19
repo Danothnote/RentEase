@@ -1,3 +1,4 @@
+import { scrollToFotter } from "../functions/navbar/scrollToFooter";
 import { verifyLoggedState } from "../functions/navbar/verifyLoggedState";
 import { pageRouter } from "../functions/pageRouter";
 import { logout } from "../functions/pocketbase/logout";
@@ -107,7 +108,9 @@ export const createNavbar = () => {
         });
 
         if (element.label === "Nosotros") {
-            section.href = element.page;
+            section.addEventListener("click", () => {
+                scrollToFotter();
+            });
         } else {
             section.addEventListener("click", () => {
                 pageRouter(element.page);
