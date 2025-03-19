@@ -3,10 +3,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
     server: {
         cors: {
-            origin: ['https://www.danosv.com/RentEase', 'http://localhost:5173'],
+            origin: ['https://rentease.danosv.com', 'http://localhost:5173'],
             methods: ['GET', 'POST'],
             allowedHeaders: ['Content-Type']
         },
-        allowedHosts: ['www.danosv.com/RentEase']
+        allowedHosts: ['rentease.danosv.com']
     }
 })
