@@ -5,9 +5,11 @@ import { pageModel } from "../model/pageModel";
 import { createNewFlatScreen } from "../screens/newFlatScreen";
 import { createProfileScreen } from "../screens/profileScreen";
 import { addFlatsArray } from "./allFlats/addFlatsArray";
+import { pb } from "./pocketbase/newPocketbase";
 
 export const pageRouter = (page) => {
     const contentScreen = document.querySelector("#contentScreen");
+    pb.collection("flats").unsubscribe();
     switch (page) {
         case pageModel.list[0]:
             pageModel.actual = pageModel.list[0];

@@ -2,11 +2,11 @@ import { profileStrings } from "../../model/profile/profileStrings";
 import { userData } from "../../model/userData";
 
 export const addUser = (user) => {
-    userData.userClass.username = user.username;
-    userData.userClass.email = user.email;
-    userData.userClass.firstName = user.firstName;
-    userData.userClass.lastName = user.lastName;
-    userData.userClass.birthday = user.birthday.split(' ')[0];
-    user.profileImg ? userData.userClass.profileImg = user.profileImg : userData.userClass.profileImg = profileStrings.userImg.src;
-    userData.userClass.id = user.id;
+    userData.userClass.setUsername(user.username);
+    userData.userClass.setEmail(user.email);
+    userData.userClass.setFirstName(user.firstName);
+    userData.userClass.setLastName(user.lastName);
+    userData.userClass.setBirthday(user.birthday.split(' ')[0]);
+    userData.userClass.setProfileImg(user.profileImg ? user.profileImg : profileStrings.userImg.src);
+    userData.userClass.setId(user.id);
 }

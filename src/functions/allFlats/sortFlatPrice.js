@@ -1,10 +1,8 @@
-import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
-
 export const sortFlatPrice = (array) => {
     const sortedArray = [...array];
     sortedArray.sort(function (a, b) {
-        const priceA = a.rentPrice;
-        const priceB = b.rentPrice;
+        const priceA = a.getRentPrice();
+        const priceB = b.getRentPrice();
         if (priceA < priceB) {
             return -1;
         }
@@ -13,5 +11,5 @@ export const sortFlatPrice = (array) => {
         }
         return 0;
     });
-    allFlatsStrings.allFlatsArray = sortedArray;
+    return sortedArray;
 }

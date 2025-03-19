@@ -45,7 +45,7 @@ export const createProfileScreen = () => {
     const user = JSON.parse(localStorage.getItem("auth"))
     addUser(user);
 
-    profileImg.src = userData.userClass.profileImg;
+    profileImg.src = userData.userClass.getProfileImg();
     profileImg.alt = profileStrings.userImg.alt;
     profileImg.id = profileStrings.userImg.id;
     profileChangeImg.src = profileStrings.editIcon.src;

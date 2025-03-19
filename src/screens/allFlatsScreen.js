@@ -1,3 +1,4 @@
+import { Flat } from "../classes/flatClass";
 import { createInput } from "../components/input";
 import { createTitle } from "../components/title";
 import { favoriteButtonEvent } from "../functions/allFlats/favoriteButtonEvent";
@@ -8,9 +9,10 @@ import { searchFilter } from "../functions/allFlats/searchFilter";
 import { sortEvent } from "../functions/allFlats/sortEvent";
 import { styleEvent } from "../functions/allFlats/styleEvent";
 import { updateFlats } from "../functions/allFlats/updateFlats";
+import { pb } from "../functions/pocketbase/newPocketbase";
+import { allFlatsCitySet } from "../model/allFlats/allFlatsFilterCitySet";
 import { allFlatsStrings } from "../model/allFlats/allFlatsStrings";
 import { favoriteFlatsSet } from "../model/allFlats/favoriteFlatsSet";
-import { filteredArray } from "../model/allFlats/filteredArray";
 import { menuShowModel } from "../model/navbar/menuShowModel";
 
 export const createAllFlatsScreen = () => {
@@ -54,6 +56,34 @@ export const createAllFlatsScreen = () => {
     filterIcon.src = allFlatsStrings.filter.iconSrc;
     filterIcon.alt = allFlatsStrings.filter.iconAlt;
 
+    // Subscribirse a los cambios en la base de datos de los departamentos
+    pb.collection("flats").subscribe("*", function (e) {
+        resetFilters();
+        if (e.action === "delete") {
+            allFlatsStrings.allFlatsArray.forEach(flat => {
+                if (flat.getId() === e.record.id) {
+                    allFlatsStrings.allFlatsArray.delete(flat);
+                    allFlatsCitySet.delete(e.record.city);
+                    document.getElementById(`${allFlatsStrings.filter.filters[0].id}Input`).childNodes.forEach(city => {
+                        if (city.value === e.record.city) {
+                            city.remove();
+                        }
+                    })
+                    updateFlats(gridIcon.classList.contains("active"), Array.from(allFlatsStrings.allFlatsArray), favoriteButton, flatsContainer);
+                }
+            })
+        } else if (e.action === "create") {
+            const imageUrl = pb.files.getURL(e.record, e.record.imageSrc);
+            const newflat = new Flat(e.record.id, e.record.name, e.record.city, e.record.streetName, e.record.streetNumber, e.record.areaSize, e.record.hasAC, e.record.yearBuilt, e.record.rentPrice, e.record.dateAvailable.split(" ")[0], imageUrl);
+            allFlatsStrings.allFlatsArray.add(newflat);
+            allFlatsCitySet.add(e.record.city);
+            const city = document.createElement("option");
+            city.textContent = e.record.city;
+            document.getElementById("cityFilterInput").appendChild(city);
+            updateFlats(gridIcon.classList.contains("active"), Array.from(allFlatsStrings.allFlatsArray), favoriteButton, flatsContainer);
+        }
+    }, {});
+
     // Agregando funcionalidad al botón de estilo
     styleButtonDiv.addEventListener("click", () => {
         styleEvent(gridIcon, tableIcon);
@@ -69,16 +99,20 @@ export const createAllFlatsScreen = () => {
     });
 
     favoriteButton.addEventListener("click", () => {
-        favoriteButtonEvent(favoriteButton);
         resetFilters();
+        favoriteButtonEvent(favoriteButton);
         updateFlats(gridIcon.classList.contains("active"), Array.from(allFlatsStrings.allFlatsArray), favoriteButton, flatsContainer);
     });
 
     // Agregando funcionalidad al botón de búsqueda
     searchBar.addEventListener("input", () => {
-        searchFilter(searchBar.value.toLowerCase());
-        resetFilters();
-        updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
+        if (favoriteButton.classList.contains("active")) {
+            updateFlats(gridIcon.classList.contains("active"), searchFilter(searchBar.value.toLowerCase(), Array.from(favoriteFlatsSet)), favoriteButton, flatsContainer);
+        } else if (allFlatsStrings.filtersOn.areaOn || allFlatsStrings.filtersOn.cityOn || allFlatsStrings.filtersOn.priceOn) {
+            updateFlats(gridIcon.classList.contains("active"), searchFilter(searchBar.value.toLowerCase(), allFlatsStrings.allFlatsFiltered), favoriteButton, flatsContainer);
+        } else {
+            updateFlats(gridIcon.classList.contains("active"), searchFilter(searchBar.value.toLowerCase(), Array.from(allFlatsStrings.allFlatsArray)), favoriteButton, flatsContainer);
+        }
     });
 
     filterIcon.addEventListener("click", () => {
@@ -88,22 +122,34 @@ export const createAllFlatsScreen = () => {
 
     // Agregando funcionalidad al selector de filtro
     filterSideBar.appendChild(filterSideBarTitle);
+    const filteredArray = [];
     allFlatsStrings.filter.filters.forEach(element => {
         const filterDiv = createInput(element.label, "", element.type, element.id, element.options, true, true)
         const filterSelect = filterDiv.childNodes[1];
 
         filterSideBar.appendChild(filterDiv);
         filterSelect.addEventListener("change", () => {
-            filterEvent(element, filterSelect.value, filteredArray);
             searchBar.value = "";
-            updateFlats(gridIcon.classList.contains("active"), allFlatsStrings.allFlatsFiltered, favoriteButton, flatsContainer);
+            searchBar.dispatchEvent(new Event("input"));
+            if (favoriteButton.classList.contains("active")) {
+                updateFlats(gridIcon.classList.contains("active"), filterEvent(element, filterSelect.value, Array.from(favoriteFlatsSet), filteredArray), favoriteButton, flatsContainer);
+            } else {
+                updateFlats(gridIcon.classList.contains("active"), filterEvent(element, filterSelect.value, Array.from(allFlatsStrings.allFlatsArray), filteredArray), favoriteButton, flatsContainer);
+            }
         })
     });
 
     // Agregando funcionalidad al selector de orden
     selectSort.childNodes[1].addEventListener("change", () => {
-        sortEvent(selectSort.childNodes[1].value);
-        updateFlats(gridIcon.classList.contains("active"), Array.from(allFlatsStrings.allFlatsArray), favoriteButton, flatsContainer);
+        searchBar.value = "";
+        searchBar.dispatchEvent(new Event("input"));
+        if (allFlatsStrings.filtersOn.areaOn || allFlatsStrings.filtersOn.cityOn || allFlatsStrings.filtersOn.priceOn) {
+            updateFlats(gridIcon.classList.contains("active"), sortEvent(selectSort.childNodes[1].value, allFlatsStrings.allFlatsFiltered), favoriteButton, flatsContainer);
+        } else if (favoriteButton.classList.contains("active")) {
+            updateFlats(gridIcon.classList.contains("active"), sortEvent(selectSort.childNodes[1].value, favoriteFlatsSet), favoriteButton, flatsContainer);
+        } else {
+            updateFlats(gridIcon.classList.contains("active"), sortEvent(selectSort.childNodes[1].value, Array.from(allFlatsStrings.allFlatsArray)), favoriteButton, flatsContainer);
+        }
     });
 
     if (menuShowModel.mediaQ527.matches) {

@@ -1,11 +1,11 @@
 import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
 
-export const searchFilter = (searchValue) => {
-    const filteredFlats = Array.from(allFlatsStrings.allFlatsArray).filter(flat =>
-        flat.name.toLowerCase().includes(searchValue) ||
-        flat.city.toLowerCase().includes(searchValue) ||
-        flat.streetName.toLowerCase().includes(searchValue) ||
-        flat.yearBuilt.toString().includes(searchValue)
+export const searchFilter = (searchValue, array) => {
+    const filteredFlats = array.filter(flat =>
+        flat.getName().toLowerCase().includes(searchValue) ||
+        flat.getCity().toLowerCase().includes(searchValue) ||
+        flat.getStreetName().toLowerCase().includes(searchValue) ||
+        flat.getYearBuilt().toString().includes(searchValue)
     );
     allFlatsStrings.allFlatsFiltered = filteredFlats;
     if (searchValue !== "") {
@@ -13,4 +13,5 @@ export const searchFilter = (searchValue) => {
     } else {
         allFlatsStrings.searchOn = false;
     }
+    return filteredFlats;
 }

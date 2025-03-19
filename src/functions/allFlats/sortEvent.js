@@ -1,21 +1,17 @@
-import { allFlatsArray } from "../../model/allFlats/allFlatsArray";
 import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
 import { sortFlatCity } from "./sortFlatCity";
 import { sortFlatPrice } from "./sortFlatPrice";
 import { sortFlatArea } from "./sortFlatsArea";
 
-export const sortEvent = (select) => {
+export const sortEvent = (select, array) => {
     switch (select) {
+        case allFlatsStrings.sort.options[0]:
+            return array;
         case allFlatsStrings.sort.options[1]:
-            sortFlatCity(allFlatsStrings.allFlatsArray);
-            break;
+            return sortFlatCity(array);
         case allFlatsStrings.sort.options[2]:
-            sortFlatPrice(allFlatsStrings.allFlatsArray);
-            break;
+            return sortFlatPrice(array);
         case allFlatsStrings.sort.options[3]:
-            sortFlatArea(allFlatsStrings.allFlatsArray);
-        default:
-            allFlatsStrings.allFlatsArray = allFlatsArray;
-            break;
+            return sortFlatArea(array);
     }
 }

@@ -20,12 +20,27 @@ export const updateUser = async (key, input, dialog, loadingDialog, errorDialog)
         localStorage.setItem("auth", JSON.stringify(auth));
         addUser(auth);
 
-        if (key === profileStrings.userImg.id) {
-            document.getElementById(navBarModel.avatar.id).src = userData.userClass.profileImg;
-            document.getElementById(profileStrings.userImg.id).src = userData.userClass.profileImg;
-        } else {
-            document.getElementById(key).textContent = userData.userClass[key];
+        switch (key) {
+            case profileStrings.userImg.id:
+                document.getElementById(navBarModel.avatar.id).src = userData.userClass.getProfileImg();
+                document.getElementById(profileStrings.userImg.id).src = userData.userClass.getProfileImg();
+                break;
+            case profileStrings.right[0].id:
+                document.getElementById(key).textContent = userData.userClass.getUsername();
+                break;
+            case profileStrings.right[1].id:
+                document.getElementById(key).textContent = userData.userClass.getFirstName();
+                document.getElementById("greetings").textContent = `${navBarModel.greetings.label}${userData.userClass.getFirstName()} ${userData.userClass.getLastName()}`;
+                break;
+            case profileStrings.right[2].id:
+                document.getElementById(key).textContent = userData.userClass.getLastName();
+                document.getElementById("greetings").textContent = `${navBarModel.greetings.label}${userData.userClass.getFirstName()} ${userData.userClass.getLastName()}`;
+                break;
+            case profileStrings.right[3].id:
+                document.getElementById(key).textContent = userData.userClass.getBirthday();
+                break;
         }
+        
         loadingDialog.close();
         dialog.close();
     } catch (error) {

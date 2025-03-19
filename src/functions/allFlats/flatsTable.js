@@ -57,18 +57,18 @@ export const flatsTable = (array, favoriteButton, grid, flatsContainer) => {
             tableImg.className = "flatTableImg";
             favorite.className = "tableFavorite";
 
-            thName.textContent = flat.name;
-            tdCity.textContent = flat.city;
-            tdStreetName.textContent = flat.streetName;
-            tdStreetNumber.textContent = flat.streetNumber;
-            tdAreaSize.textContent = `${flat.areaSize} m²`;
-            tdYearBuilt.textContent = flat.yearBuilt;
-            tdDateAvailable.textContent = flat.dateAvailable;
-            tdRentPrice.textContent = `$${flat.rentPrice}`;
-            tableImg.src = flat.imageSrc;
+            thName.textContent = flat.getName();
+            tdCity.textContent = flat.getCity();
+            tdStreetName.textContent = flat.getStreetName();
+            tdStreetNumber.textContent = flat.getStreetNumber();
+            tdAreaSize.textContent = `${flat.getAreaSize()} m²`;
+            tdYearBuilt.textContent = flat.getYearBuilt();
+            tdDateAvailable.textContent = flat.getDateAvailable();
+            tdRentPrice.textContent = `$${flat.getRentPrice()}`;
+            tableImg.src = flat.getImageSrc();
             tableImg.alt = allFlatsStrings.imgAlt;
             favorite.alt = allFlatsStrings.favorite.alt;
-            tdHasAC.textContent = flat.hasAC ? "Si" : "No";
+            tdHasAC.textContent = flat.getHasAC() ? "Si" : "No";
             favorite.src = favoriteFlatsSet.has(flat) ? allFlatsStrings.favorite.favoriteIcon : allFlatsStrings.favorite.unfavoriteIcon;
 
             favorite.addEventListener("click", () => {

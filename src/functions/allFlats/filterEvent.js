@@ -1,8 +1,8 @@
 import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
 import { mapFilters } from "../../model/allFlats/mapFilters";
 
-export const filterEvent = (filter, selectedOption, filteredArray) => {
-    const filterArray = Array.from(allFlatsStrings.allFlatsArray);
+export const filterEvent = (filter, selectedOption, flatsArray, filteredArray) => {
+    const filterArray = flatsArray;
     filteredArray = filterArray;
     const filters = Array.from(allFlatsStrings.filter.filters);
 
@@ -11,11 +11,9 @@ export const filterEvent = (filter, selectedOption, filteredArray) => {
             if (selectedOption === "Todas") {
                 allFlatsStrings.filtersOn.cityOn = false;
                 mapFilters.set("city", (array) => array);
-                break;
             } else {
                 allFlatsStrings.filtersOn.cityOn = true;
-                mapFilters.set("city", (array) => array.filter(flat => flat.city === selectedOption));
-                break;
+                mapFilters.set("city", (array) => array.filter(flat => flat.getCity() === selectedOption));
             }
         case allFlatsStrings.filter.filters[1].label:
             switch (selectedOption) {
@@ -25,17 +23,15 @@ export const filterEvent = (filter, selectedOption, filteredArray) => {
                     break;
                 case filters[1].options[1]:
                     allFlatsStrings.filtersOn.priceOn = true;
-                    mapFilters.set("price", (array) => array.filter(flat => flat.rentPrice < 100));
+                    mapFilters.set("price", (array) => array.filter(flat => flat.getRentPrice() < 100));
                     break;
                 case filters[1].options[2]:
                     allFlatsStrings.filtersOn.priceOn = true;
-                    mapFilters.set("price", (array) => array.filter(flat => flat.rentPrice >= 100 && flat.rentPrice <= 200));
+                    mapFilters.set("price", (array) => array.filter(flat => flat.getRentPrice() >= 100 && flat.getRentPrice() <= 200));
                     break;
                 case filters[1].options[3]:
                     allFlatsStrings.filtersOn.priceOn = true;
-                    mapFilters.set("price", (array) => array.filter(flat => flat.rentPrice > 200));
-                    break;
-                default:
+                    mapFilters.set("price", (array) => array.filter(flat => flat.getRentPrice() > 200));
                     break;
             }
         case allFlatsStrings.filter.filters[2].label:
@@ -46,24 +42,21 @@ export const filterEvent = (filter, selectedOption, filteredArray) => {
                     break;
                 case filters[2].options[1]:
                     allFlatsStrings.filtersOn.areaOn = true;
-                    mapFilters.set("area", (array) => array.filter(flat => flat.areaSize < 100));
+                    mapFilters.set("area", (array) => array.filter(flat => flat.getAreaSize() < 100));
                     break;
                 case filters[2].options[2]:
                     allFlatsStrings.filtersOn.areaOn = true;
-                    mapFilters.set("area", (array) => array.filter(flat => flat.areaSize >= 100 && flat.areaSize <= 200));
+                    mapFilters.set("area", (array) => array.filter(flat => flat.getAreaSize() >= 100 && flat.getAreaSize() <= 200));
                     break;
                 case filters[2].options[3]:
                     allFlatsStrings.filtersOn.areaOn = true;
-                    mapFilters.set("area", (array) => array.filter(flat => flat.areaSize > 200));
-                    break;
-                default:
+                    mapFilters.set("area", (array) => array.filter(flat => flat.getAreaSize() > 200));
                     break;
             }
-        default:
-            break;
     }
     mapFilters.forEach(func => {
         filteredArray = func(filteredArray);
     });
     allFlatsStrings.allFlatsFiltered = filteredArray;
+    return filteredArray;
 }

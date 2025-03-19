@@ -9,7 +9,7 @@ export const addFlatsArray = async (contentScreen) => {
     const record = await pb.collection('flats').getFullList('RECORD_ID');
     record.forEach(flat => {
         const imageUrl = pb.files.getURL(record[record.indexOf(flat)], flat.imageSrc);
-        const newflat = new Flat(flat.name, flat.city, flat.streetName, flat.streetNumber, flat.areaSize, flat.hasAC, flat.yearBuilt, flat.rentPrice, flat.dateAvailable.split(" ")[0], imageUrl);
+        const newflat = new Flat(flat.id, flat.name, flat.city, flat.streetName, flat.streetNumber, flat.areaSize, flat.hasAC, flat.yearBuilt, flat.rentPrice, flat.dateAvailable.split(" ")[0], imageUrl);
         allFlatsArray.add(newflat);
     });
     addCityFilter();

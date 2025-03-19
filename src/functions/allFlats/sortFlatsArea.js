@@ -1,10 +1,8 @@
-import { allFlatsStrings } from "../../model/allFlats/allFlatsStrings";
-
 export const sortFlatArea = (array) => {
     const sortedArray = [...array];
     sortedArray.sort(function (a, b) {
-        const areaA = a.areaSize;
-        const areaB = b.areaSize;
+        const areaA = a.getAreaSize();
+        const areaB = b.getAreaSize();
         if (areaA < areaB) {
             return -1;
         }
@@ -13,5 +11,5 @@ export const sortFlatArea = (array) => {
         }
         return 0;
     });
-    allFlatsStrings.allFlatsArray = sortedArray;
+    return sortedArray;
 }

@@ -3,6 +3,6 @@ import { allFlatsCitySet } from "../../model/allFlats/allFlatsFilterCitySet";
 
 export const addCityFilter = () => {
     allFlatsArray.forEach(flat => {
-        allFlatsCitySet.add(flat.city);
+        allFlatsCitySet.add(flat.getCity());
     });
 }
